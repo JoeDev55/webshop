@@ -1,26 +1,27 @@
-import './NavBar.css';
+import { Link } from "react-router-dom";
+import './styles.css';
 
 function NavBar() {
   return (
     <div >
-      <header className="App-header">
+      
         <nav className='navBar'>
             <ul className='navItems'>
                 <li >
-                    <a href='#OrderNow.js'>Order Now</a>
+                  <Link to={'/'}>Home</Link>
                 </li>
                 <li>
-                    <a href='#AboutUs.js'>Something</a>
+                  <Link to={'/products'}>Products</Link>
                 </li>
                 <li>
-                    <a href='#AboutUs.js'>My profile</a>
+                  <Link to={'/aboutUs'}>About Us</Link>
                 </li>
                 <li>
-                    <a href='#AboutUs.js'>About Us</a>
+                  <Link to={'/myProfile'}>My profile</Link>
                 </li>
             </ul>
         </nav>
-      </header>
+      
     </div>
   );
 }

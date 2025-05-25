@@ -1,0 +1,74 @@
+
+
+/*NAVBAR STYLES*/
+.navBar{
+    background-color: lightblue;
+    top:0;
+    width:100%;
+    position:fixed ;
+    display: flex;
+    justify-content: center;
+    
+    
+}
+.navItems{
+    display: inline-flex;
+    flex-direction: row;
+    gap:6rem;
+    
+    
+}
+.navItems li{
+    list-style: none;
+    text-decoration: none;
+    
+}
+.navItems li a{
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: large;
+    text-decoration: none;
+    text-align: center;
+    
+}
+
+/*   HOMEPAGE STYLES*/
+
+
+.mainContainer{
+
+}
+.headerContainer{
+    opacity: 100%;
+}
+
+
+.shopQuick{
+    display: flex;
+    justify-content: center;
+    height: 200px;
+}
+
+#homeBgContainer{
+    background-image: url('./media/homebg.jpg');
+    width: 700px;
+    height: 1000px;
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    background-size:cover;
+    
+    
+}
+/*
+#homeBgContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);  or rgba(0,0,0,0.5) for dark overlay 
+  z-index: 1;
+}
+
+*/
