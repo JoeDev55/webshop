@@ -1,0 +1,15 @@
+.navBar{
+    flex-direction: 'column';
+    display: flex;
+}
+
+.navItems{
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+.navItems a{
+color: white;
+text-decoration: none;
+
+}
