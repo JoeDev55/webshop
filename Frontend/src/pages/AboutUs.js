@@ -4,16 +4,18 @@ import NavBar from '../NavBar';
 
 function AboutUs() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <NavBar/>
-
-            <div>
-                About us
-            </div>
-        
-      </header>
-    </div>
+    <div className="mainContainer">
+          <header className="App-header">
+            <NavBar/>
+          </header>
+    
+          <div className="aboutUsContainer" >
+    
+             <div className="signUp">
+                    About us
+                </div>
+          </div>
+        </div>
   );
 }
 

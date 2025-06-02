@@ -37,12 +37,10 @@
 
 .mainContainer{
     
-    background-color: #95C5AB;
+    background-color: white;
 }
-.headerContainer{
-    
-}
-.bodyContainer{
+
+.homepageContainer{
     justify-content: center;
     display: flex;
     flex-direction: column;
@@ -100,4 +98,120 @@
 .footerContainer{
     height: 200px;
     background-color: #012001;
+}
+/*MY PROFILE STYLES*/
+
+.profileContainer{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 54px;
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    background-image: url(./media/homebg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 1000px;
+}
+.signInStatus{
+    justify-content: center;
+    display: flex;
+    color: white;
+    font-size: xx-large;
+}
+.signUp{
+     justify-content: center;
+    display: flex;
+    color: white;
+    font-size: xx-large;
+}
+/*SIGN UP PAGE STYLES*/
+.signUpContainer{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 54px;
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    background-image: url(./media/homebg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 1000px;
+}
+
+/*LOG IN PAGE STYLES*/
+.logInContainer{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 54px;
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    background-image: url(./media/homebg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 1000px;
+}
+
+/*ABOUT US STYLES*/
+.aboutUsContainer{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 54px;
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    background-image: url(./media/homebg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 1000px;
+}
+
+
+/*PRODUCTS STYLES*/
+.productsContainer{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 54px;
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    /*background-image: url(./media/homebg.jpg);*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 1000px;
+    
+}
+.products{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    justify-content: center;
+
+}
+.productImg img{
+    width:200px;
+    height:200px;
+    display: flex;
+
+}
+.productDesc{
+    display: flex;
+    flex-direction: column;
+}
+.productDesc p{
+    display: flex;
+}
+.productIndiv{
+    display: flex;
+    flex-direction: column;
 }
