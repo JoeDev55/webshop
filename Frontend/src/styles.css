@@ -177,6 +177,65 @@
 
 
 /*PRODUCTS STYLES*/
+.dividerContainer{
+    display: flex;
+    flex-direction: row;
+}
+.searchBarContainer{
+    width:20%;
+    height:500px;
+    margin-left:1%;
+    padding-left:1%;
+    margin-top:54px;
+    position:fixed;
+    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+.searchBarContainer button{
+    background-color:#95C5AB;
+    border-width: 0;
+    border-radius: 10px;
+    width:100%;
+    
+    
+}
+.searchBarContainer input{
+    
+    border-width: 1;
+    border-radius: 5px;
+    width:100%;
+    display: flex;
+    
+}
+.searchBar{
+    display: flex;
+    flex-direction: row;
+    height:30px;
+}
+.searchBar input{
+    display: flex;
+}
+.searchBar button{
+    display:flex ;
+    width:15%;
+    align-items: center;
+}
+.searchFilter button{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.searchFilter button:hover{
+    margin-top: 9px;
+    margin-bottom: 9px;
+    border: solid #95C5AB 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #95C5AB;
+    font-weight: bold;
+}
+
 .productsContainer{
     justify-content: center;
     display: flex;
@@ -185,6 +244,7 @@
     margin-left: 20%;
     margin-right: 20%;
     display: flex;
+    width:60%;
     /*background-image: url(./media/homebg.jpg);*/
     background-size: cover;
     background-position: center;
@@ -192,7 +252,7 @@
     min-height: 1000px;
     
 }
-.products{
+.products {
     display: grid;
     grid-template-columns: repeat(auto-fit, 300px);
     justify-content: center;
@@ -211,7 +271,29 @@
 .productDesc p{
     display: flex;
 }
-.productIndiv{
+.productIndiv {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin:6px;
+    background-color: white;
+    border-width: 0;
+}
+.productIndiv:hover{
+    border: solid #95C5AB 1px;
+    border-radius: 5px;
+    margin:5px;
+    box-shadow: 2px 2px 5px #95C5AB;
+}
+.listContainer{
+    width:20%;
+    height:500px;
+    margin-right:10px;
+    
+    margin-top:60px;
+    display: flex;
+    position: fixed;
+    right:0;
+    top:60;
     flex-direction: column;
 }
