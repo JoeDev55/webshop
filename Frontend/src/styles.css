@@ -289,11 +289,25 @@
     width:20%;
     height:500px;
     margin-right:10px;
-    
+    background-color: #78a7a2;
     margin-top:60px;
     display: flex;
     position: fixed;
     right:0;
     top:60;
     flex-direction: column;
+}
+.listContainer li{
+    display: flex;
+    flex-direction: row;
+}
+.listContainer li button{
+    background-color: white;
+    border: 0px;
+    border-radius: 20%;
+    height:30px;
+    align-content: center;
+}
+.counter{
+    padding-right: 3px;
 }
