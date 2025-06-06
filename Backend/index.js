@@ -30,6 +30,52 @@ app.get("/productList",(req,res)=> {
         console.log(err)
     })
 })
+
+app.get("/fruitList",(req,res)=> {
+    productModel.find({category: "fruit"})
+    .then(function(products){
+        console.log("Products in fruit category fetched: ",products)
+        res.json(products)
+    }).catch(function(err){
+        console.log(err)
+    })
+})
+app.get("/vegetableList",(req,res)=> {
+    productModel.find({category: "vegetable"})
+    .then(function(products){
+        console.log("Products in vegetable category fetched: ",products)
+        res.json(products)
+    }).catch(function(err){
+        console.log(err)
+    })
+})
+app.get("/dairyList",(req,res)=> {
+    productModel.find({category: "dairy"})
+    .then(function(products){
+        console.log("Products in dairy category fetched: ",products)
+        res.json(products)
+    }).catch(function(err){
+        console.log(err)
+    })
+})
+app.get("/meatList",(req,res)=> {
+    productModel.find({category: "meat"})
+    .then(function(products){
+        console.log("Products in meat category fetched: ",products)
+        res.json(products)
+    }).catch(function(err){
+        console.log(err)
+    })
+})
+app.get("/specialtyList",(req,res)=> {
+    productModel.find({category: "specialty"})
+    .then(function(products){
+        console.log("Products in specialty category fetched: ",products)
+        res.json(products)
+    }).catch(function(err){
+        console.log(err)
+    })
+})
 /*
 app.post("/addUser",(req,res)=> {
     const { name, age, email} = req.body

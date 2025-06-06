@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import {useState } from "react";
 import { useEffect } from "react";
 
 import NavBar from '../NavBar';
@@ -8,42 +8,98 @@ function Products() {
 
   const [products, setProducts] = useState([])
   const [shoppingList,setShoppingList] = useState([])
-  var [itemCounter,setItemCounter] = useState(1)
+
+  const [category,setCategory]= useState("all")
+  
   useEffect(() => {
-    fetch('http://localhost:3000/productList')  // your backend endpoint
+    
+    const endpoints ={
+      all: "http://localhost:3000/productList",
+      fruit: "http://localhost:3000/fruitList",
+      vegetables:"http://localhost:3000/vegetableList",
+      meat:"http://localhost:3000/meatList",
+      dairy:"http://localhost:3000/dairyList",
+      specialty:"http://localhost:3000/specialtyList"
+    }
+    const endpoint = endpoints[category] || endpoints.all;
+
+
+    fetch(endpoint)  // your backend endpoint
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(err => console.error('Error fetching products:', err));
-  }, []);
+      
+  }, [category]);
 
+ useEffect(() => {
+  console.log("Shopping list updated:", shoppingList);
+}, [shoppingList]);
+
+  
+ 
+ 
   function Add(item){
-    if (shoppingList.length === 0 ) {
-      setShoppingList(prevList => [...prevList, item])
+    
+    /*const added = shoppingList.find(i=> i.product?._id === item._id)
+    if (added) {
+      //console.log(item._id)
+      //console.log(item.name)
+      const updated = shoppingList.map(i=> i.product?._id === item._id
+      ? {...item, quantity: i.quantity + 1}
+      :i)
+      setShoppingList(updated)
     }
-    else if(shoppingList.includes(item)){
-      console.log(item.name)
-      setItemCounter(prevCount => prevCount + 1)
-    }
+    else {
+			setShoppingList([...shoppingList, {product: item, quantity: 1}]);
+		}
+    */
+   
+   
+   const exists = shoppingList.find(i=> i._id === item._id)
+   if (exists) {
+    const updatedList = shoppingList.map(i =>
+      i._id === item._id
+        ? { ...i, quantity: (i.quantity || 1) + 1 }
+        : i
+        
+    );
+    setShoppingList(updatedList);
+    console.log(item.quantity)
+    
+   }
+   else {
+    
+    setShoppingList([...shoppingList,{...item,quantity: 1}]);
+    console.log(item.quantity)
   }
-  function ShopPlus(item){
+   
     
-      setItemCounter(prevCount => prevCount + 1)
-    
-    
+   
   }
-  function ShopMinus(item){
-    if (shoppingList.length >= 0) {
-      if (setItemCounter === 0) {
-        setShoppingList(prevList => prevList.filter(item => item != item));
-      }
-      setItemCounter(prevCount => prevCount - 1)
+  function Remove(item){
+    if (item.quantity <=0 || item.quantity === 1) {
+      const removeItem = shoppingList.filter(i=> i._id !== item._id)
+      setShoppingList(removeItem)
+      console.log(item.quantity)
+      
+     
     }
+    else if(item.quantity >1){
+      const updatedList = shoppingList.map(i =>
+      i._id === item._id
+        ? { ...i, quantity: Math.max((i.quantity || 1) - 1 , 0)}
+        : i
+        
+    );
     
-    
+    setShoppingList(updatedList);
+    console.log(item.quantity)
+    }
+    //console.log(shoppingList)
   }
   function Clear(){
     setShoppingList([])
-    setItemCounter(0)
+    
   }
   
   
@@ -63,17 +119,23 @@ function Products() {
           </button>
         </div>
         <div className="searchFilter">
-          <button >
+          <button onClick={()=> setCategory("fruit")}>
             <p>Fruits</p>
           </button>
-          <button >
+          <button onClick={()=> setCategory("vegetables")}>
             <p>Vegetables</p>
           </button>
-          <button >
+          <button onClick={()=> setCategory("meat")}>
             <p>Meat</p>
           </button>
-          <button >
+          <button onClick={()=> setCategory("dairy")}>
             <p>Dairy</p>
+          </button>
+          <button onClick={()=> setCategory("specialty")}>
+            <p>Specialty</p>
+          </button>
+          <button onClick={()=> setCategory("all")} >
+            <p>Reset filters</p>
           </button>
         </div>
     
@@ -87,7 +149,7 @@ function Products() {
 
          <div className="products">
                 {products.map(item => (
-          <button key={item.id} className="productIndiv" onClick={()=> Add(item)}>
+          <button key={item._id} className="productIndiv" onClick={()=> Add(item)}>
             <div key={item.img} className="productImg">
               <img  src={`http://localhost:3000/${item.img}`} alt={item.name}  />  
             </div>
@@ -103,13 +165,15 @@ function Products() {
         <ul>
           {shoppingList.map(item=>(
             
-          <li>
-            <p key={item.name} className="counter">{itemCounter}x </p>
+          <li key={item._id}>
+            
+            
+            <p id={item._id}>{item.quantity}x  </p>
             <p>{item.name}</p>
-            <button key={item.id} onClick={ShopMinus}>
+            <button key={item.name} onClick={() => Remove(item)}>
               <p>-</p>
             </button>
-            <button key={item.id} onClick={ShopPlus}>
+            <button key={item._id} onClick={() => Add(item)}>
               <p>+</p>
             </button>
           </li>
