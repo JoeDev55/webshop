@@ -76,6 +76,20 @@ app.get("/specialtyList",(req,res)=> {
         console.log(err)
     })
 })
+app.get('/filteredProducts',(req,res)=>{
+    productModel.find({})
+    .then(products =>{
+    const {q} = req.query
+    let filtered = products
+    if(q){
+        const query = q.toLowerCase()
+        filtered = filtered.filter(
+            (product) => product.name.toLowerCase().includes(query)
+        )
+    }
+    res.json(filtered)
+    })
+})
 /*
 app.post("/addUser",(req,res)=> {
     const { name, age, email} = req.body

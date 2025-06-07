@@ -8,9 +8,10 @@ function Products() {
 
   const [products, setProducts] = useState([])
   const [shoppingList,setShoppingList] = useState([])
-
   const [category,setCategory]= useState("all")
-  
+  const [searchQuery,setSearchQuery] = useState('')
+  //const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
+  const [searchResults, setSearchResults] = useState([]);
   useEffect(() => {
     
     const endpoints ={
@@ -99,9 +100,42 @@ function Products() {
   }
   function Clear(){
     setShoppingList([])
-    
+    setSearchQuery('')
   }
+/*
+  useEffect(() => {
+  const handler = setTimeout(() => {
+    setDebouncedSearchQuery(searchQuery);
+  }, 300); // 300ms delay
+
+  return () => {
+    clearTimeout(handler);
+  };
+}, [searchQuery]);
+*/
+  useEffect(() => {
+
+    if (searchQuery.trim() === "") {
+      setSearchResults([]); // Clear search results
+      return;
+    }
+
+      const endpoint =`http://localhost:3000/filteredProducts?q=${encodeURIComponent(searchQuery)}`;
+      
+      fetch(endpoint)
+        .then(response => response.json())
+        .then(data => setSearchResults(data))
+        .catch(err => console.error('Error fetching products:', err));
+    }, [searchQuery]);
+
+
+    const productsToDisplay =
+    searchQuery.trim() !== ""
+      ? searchResults
+      : products;
+    
   
+
   
   return (
     <div className="mainContainerProducts">
@@ -112,7 +146,7 @@ function Products() {
       <div className="searchBarContainer">
         
         <div className="searchBar">
-          <input type="text"></input>
+          <input type="text" placeholder="Search" value={searchQuery} onChange={(e)=> setSearchQuery(e.target.value)}></input>
         
           <button>
             <p>🔍</p>
@@ -148,7 +182,7 @@ function Products() {
       <div className="productsContainer" >
 
          <div className="products">
-                {products.map(item => (
+                {productsToDisplay.map(item => (
           <button key={item._id} className="productIndiv" onClick={()=> Add(item)}>
             <div key={item.img} className="productImg">
               <img  src={`http://localhost:3000/${item.img}`} alt={item.name}  />  
@@ -184,7 +218,7 @@ function Products() {
         </ul>
         <div>
           <button onClick={Clear}>
-            <p>Clear all</p>
+            <p>Clear shoppinglist</p>
           </button>
         </div>
         
