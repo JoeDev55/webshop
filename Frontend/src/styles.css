@@ -143,6 +143,13 @@
     min-height: 1000px;
 }
 
+.signUpContainer form input{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    
+}
+
 /*LOG IN PAGE STYLES*/
 .logInContainer{
     justify-content: center;
@@ -157,6 +164,11 @@
     background-position: center;
     background-repeat: no-repeat;
     min-height: 1000px;
+}
+.logInContainer form input{
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 /*ABOUT US STYLES*/

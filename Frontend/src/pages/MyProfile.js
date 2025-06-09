@@ -51,6 +51,7 @@ function MyProfile() {
         
         <div className="signInStatus">
                 Signed in 
+                hello
         </div>
       </div>
     </div>

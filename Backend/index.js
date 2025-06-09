@@ -4,6 +4,9 @@ const port = 3000
 var cors = require('cors')
 const path = require('path')
 const app = express()
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const JWT_SECRET = process.env.JWT_SECRET || 'asd'
 app.use(cors())
 app.use(express.json())
 
@@ -19,7 +22,19 @@ const ProductSchema = new mongoose.Schema({
     img:String
 })
 
+const UserSchema = new mongoose.Schema({
+    id: Number,
+    email: String,
+    password: String,
+    firstName: String,
+    lastName: String,
+    phoneNumber: String,
+    age: String
+    
+})
+
 const productModel = mongoose.model("products",ProductSchema)
+const userModel = mongoose.model("users",UserSchema)
 
 app.get("/productList",(req,res)=> {
     productModel.find({})
@@ -106,7 +121,77 @@ app.post("/addUser",(req,res)=> {
     
 })
 */
+app.post('/signup',async (req,res)=>{
+   const {email, password,firstName, lastName, phoneNumber, age} = req.body
+    console.log("received signup data",req.body)
+   if (!email || !password || !firstName || !lastName || !phoneNumber || !age) {
+    console.log('fill out all the fields')
+    //return res.status(400).json({message: 'fill out all the fields'})
+    
+   }
+   try{
+    const existingUser = await userModel.findOne({email})
+    if (existingUser) {
+        console.log('already exists')
+        //return res.status(409).json({ message: 'Email already in use.' })
+    }
+   
+   const hashedPassword = await bcrypt.hash(password, 10)
+   const newUser = new userModel({
+      email,
+      password: hashedPassword,
+      firstName,
+      lastName,
+      phoneNumber,
+      age
+    });
+    await newUser.save()
+    console.log('success in registering the user')
+    res.status(201).json({message:'user registered successfully'})
+    const token = jwt.sign(
+        {id:userModel._id,email:userModel.email},
+        JWT_SECRET,
+        {expiresIn:'1h'}
+    )
+    res.status(200).json({token})
+}catch(error){
+    console.error('error in signup:', error);
+    return res.status(500).json({message: 'server error'})
+}
+   
+}
+)
+app.post('/login',async (req, res)=>{
+    const {email, password} = req.body
+    try{
+        const userExists = userModel.findOne({email})
+        if(!userExists){
+            return res.status(400).json({message:'user doesnt exist'})
+        }
+        const matching = bcrypt.compare(password, userExists.password)
+        if(!matching){
+            return res.status(400).json({message: 'invalid  credentials'})
+        }
+        const token = jwt.sign(
+            {id: userExists._id, email: userExists.email},
+            JWT_SECRET,
+            {expiresIn:'1h'}
+        )
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true, // only over HTTPS
+            sameSite: 'Strict', // prevent CSRF
+        });
 
-app.listen(3000, ()=>{
+        res.status(201).json({message:'login successful', token})
+    }
+    catch(error){
+        console.error('error in login', error)
+        res.status(500).json({message:'Server error'})
+    }
+}
+
+)
+app.listen(port, ()=>{
     console.log(`Server is running`)
 })
