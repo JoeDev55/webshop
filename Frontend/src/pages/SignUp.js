@@ -8,6 +8,39 @@ function SignUp() {
   function toLogIn(){
     navigate('/logIn')
   }
+  async function sendCredentials(e){
+    e.preventDefault()
+    const formData = new FormData(e.target)
+    
+    const credentials = {
+      email: formData.get("email"),
+      password: formData.get("password"),
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      phoneNumber: formData.get("phoneNumber"),
+      age: formData.get("age")
+    }
+
+    try{
+      const response = await fetch('http://localhost:3000/signup',{
+        method:"POST",
+        headers:{
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials)
+      })
+      if (response.ok) {
+        
+        navigate("/myProfile")
+      }
+      else{
+        alert('error during signup')
+      }
+    }catch{
+      console.log('server error')
+    }
+    
+  }
   return (
     <div className="mainContainer">
           <header className="App-header">
@@ -21,36 +54,16 @@ function SignUp() {
                 sign up page
               </span>
 
-              
-            <div style={{color:"white", display:"flex", justifyContent:'center'}}>
-                <input type="text" placeholder="E-mail" >
-                </input>
-            </div>
-
-            <div style={{color:"white", display:"flex", justifyContent:'center'}}>
-                <input type="text" placeholder="Password" >
-                </input>
-            </div>
-            <div style={{color:"white", display:"flex", justifyContent:'center'}}>
-                <input type="text" placeholder="First name" >
-                </input>
-            </div>
-            <div style={{color:"white", display:"flex", justifyContent:'center'}}>
-                <input type="text" placeholder="Last name" >
-                </input>
-            </div>
-            <div style={{color:"white", display:"flex", justifyContent:'center'}}>
-                <input type="text" placeholder="Phone number" >
-                </input>
-            </div>
-            <div style={{color:"white", display:"flex", justifyContent:'center'}}>
-                <input type="text" placeholder="Address" >
-                </input>
-            </div>
-            <div style={{color:"white", display:"flex", justifyContent:'center'}}>
-                <input type="text" placeholder="Date of birth" >
-                </input>
-            </div>
+              <form onSubmit={sendCredentials}>
+                <input placeholder="E-mail" name="email"/>
+                <input placeholder="Password" type="password" name="password"/>
+                <input placeholder="First name" name="firstName"/>
+                <input placeholder="Last name" name="lastName"/>
+                <input placeholder="Phone number" type="tel" name="phoneNumber"/>
+                <input placeholder="Date of birth" name="age"/>
+                <button type="submit">Submit</button>
+              </form>
+            
             
                 <span style={{color:"white", display:"flex", justifyContent:'center'}}>
                      Already have an account?

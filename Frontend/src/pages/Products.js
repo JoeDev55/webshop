@@ -10,6 +10,7 @@ function Products() {
   const [shoppingList,setShoppingList] = useState([])
   const [category,setCategory]= useState("all")
   const [searchQuery,setSearchQuery] = useState('')
+  const [favList,setFavList]=useState([])
   //const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
   const [searchResults, setSearchResults] = useState([]);
   useEffect(() => {
@@ -134,7 +135,9 @@ function Products() {
       ? searchResults
       : products;
     
-  
+  function Favourite(item){
+    setFavList(prevList=> [...prevList,item])
+  }
 
   
   return (
