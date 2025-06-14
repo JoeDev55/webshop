@@ -30,13 +30,14 @@ function SignUp() {
         body: JSON.stringify(credentials)
       })
       if (response.ok) {
+        
         navigate("/myProfile")
       }
       else{
         alert('error during signup')
       }
     }catch{
-
+      console.log('server error')
     }
     
   }

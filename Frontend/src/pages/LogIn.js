@@ -1,7 +1,8 @@
-import react from "react";
+//import react from "react";
 
 import NavBar from '../NavBar';
 import { useNavigate } from "react-router";
+import MyProfile from "./MyProfile";
 
 function LogIn() {
     const navigate = useNavigate()
@@ -28,8 +29,14 @@ function LogIn() {
         const data = await response.json()
         if (response.ok) {
           localStorage.setItem('token',data.token)
+          console.log('Token saved:', localStorage.getItem('token'));
           console.log('login successful')
+        
+          localStorage.setItem('email', data.email);
           navigate('/myProfile')
+          
+          
+
         }
         else{
           console.error('login failed', data.message)

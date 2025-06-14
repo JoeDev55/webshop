@@ -6,6 +6,7 @@ const path = require('path')
 const app = express()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { stringify } = require('querystring')
 const JWT_SECRET = process.env.JWT_SECRET || 'asd'
 app.use(cors())
 app.use(express.json())
@@ -29,8 +30,16 @@ const UserSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     phoneNumber: String,
-    age: String
-    
+    age: String,
+    favourites: [
+        {
+        prodId: Number,
+        prodName: String,
+        prodPrice: Number,
+        prodCat: String,
+        prodImg: String
+        }
+    ]
 })
 
 const productModel = mongoose.model("products",ProductSchema)
@@ -123,17 +132,17 @@ app.post("/addUser",(req,res)=> {
 */
 app.post('/signup',async (req,res)=>{
    const {email, password,firstName, lastName, phoneNumber, age} = req.body
-    console.log("received signup data",req.body)
+    console.log("received signup data",req.body.email)
    if (!email || !password || !firstName || !lastName || !phoneNumber || !age) {
     console.log('fill out all the fields')
-    //return res.status(400).json({message: 'fill out all the fields'})
+    return res.status(400).json({message: 'fill out all the fields'})
     
    }
    try{
     const existingUser = await userModel.findOne({email})
     if (existingUser) {
         console.log('already exists')
-        //return res.status(409).json({ message: 'Email already in use.' })
+        return res.status(409).json({ message: 'Email already in use.' })
     }
    
    const hashedPassword = await bcrypt.hash(password, 10)
@@ -143,17 +152,20 @@ app.post('/signup',async (req,res)=>{
       firstName,
       lastName,
       phoneNumber,
-      age
+      age,
+      favourites
     });
     await newUser.save()
     console.log('success in registering the user')
-    res.status(201).json({message:'user registered successfully'})
-    const token = jwt.sign(
-        {id:userModel._id,email:userModel.email},
-        JWT_SECRET,
-        {expiresIn:'1h'}
-    )
-    res.status(200).json({token})
+   const token = jwt.sign(
+            {id: newUser._id, email: newUser.email},
+            JWT_SECRET,
+            {expiresIn:'1h'}
+        )
+    
+    res.status(201).json({message:'user registered successfully',token, email})
+    
+    //res.status(200).json({token})
 }catch(error){
     console.error('error in signup:', error);
     return res.status(500).json({message: 'server error'})
@@ -164,11 +176,12 @@ app.post('/signup',async (req,res)=>{
 app.post('/login',async (req, res)=>{
     const {email, password} = req.body
     try{
-        const userExists = userModel.findOne({email})
+        const userExists = await userModel.findOne({email})
         if(!userExists){
             return res.status(400).json({message:'user doesnt exist'})
         }
-        const matching = bcrypt.compare(password, userExists.password)
+        console.log(password, userExists.password)
+        const matching = await bcrypt.compare(password, userExists.password)
         if(!matching){
             return res.status(400).json({message: 'invalid  credentials'})
         }
@@ -177,13 +190,9 @@ app.post('/login',async (req, res)=>{
             JWT_SECRET,
             {expiresIn:'1h'}
         )
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: true, // only over HTTPS
-            sameSite: 'Strict', // prevent CSRF
-        });
+        
 
-        res.status(201).json({message:'login successful', token})
+        res.status(201).json({message:'login successful', token, email})
     }
     catch(error){
         console.error('error in login', error)
@@ -192,6 +201,28 @@ app.post('/login',async (req, res)=>{
 }
 
 )
+app.get('/user/profile', async (req, res) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ message: 'No token provided' });
+  }
+
+  const token = authHeader.split(' ')[1];
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const user = await userModel.findOne({ email: decoded.email }).select('-password'); // remove password from result
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(401).json({ message: 'Invalid or expired token' });
+  }
+});
+
+
 app.listen(port, ()=>{
     console.log(`Server is running`)
 })

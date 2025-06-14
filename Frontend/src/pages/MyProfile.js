@@ -1,6 +1,7 @@
-import react from "react";
+import react, { useEffect, useState } from "react";
 import NavBar from '../NavBar';
 import { useNavigate } from "react-router";
+import { useLocation } from "react-router";
 
 function MyProfile() {
   const signedIn=false
@@ -11,36 +12,43 @@ function MyProfile() {
   function signUp(){
     navigate('/signUp')
   }
-  if (!signedIn) {
-    return(
-      
-    <div className="mainContainer">
-      <header className="App-header">
-        <NavBar/>
-      </header>
-
-      <div className="profileContainer" >
-        <div className="signUp">
-          <button onClick={signUp}>
-            <span>
-              Sign up
-            </span>
-          </button>
-          <button onClick={logIn}>
-            <span>
-              Log in
-            </span>
-          </button>
-        </div>
-        <div className="signInStatus">
-                Not signed in 
-        </div>
-      </div>
-    </div>
-  );
-    
+  function logOut(){
+    localStorage.removeItem('token')
+    localStorage.removeItem('email')
+    window.location.reload()
   }
-  else{
+  useEffect(()=>{ async function fetchUserData(){
+    const token = localStorage.getItem('token')
+    if (!token) {
+      console.log('no token found')
+      return navigate('/LogIn')
+    }
+    try {
+      const response = await fetch('http://localhost:3000/user/profile', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch user');
+      }
+
+      const data = await response.json();
+      setUser(data);
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      navigate('/logIn');
+    }
+  }
+  fetchUserData()
+  },[navigate])
+  const location = useLocation()
+  //const email = location.state?.email;
+  const [user,setUser] = useState()
+  const storedEmail = localStorage.getItem('email');
+  
  return (
     <div className="mainContainer">
       <header className="App-header">
@@ -50,8 +58,11 @@ function MyProfile() {
       <div className="profileContainer" >
         
         <div className="signInStatus">
-                Signed in 
-                hello
+                Signed in as {user?.firstName}
+                hello 
+                <div>
+                  <button onClick={logOut}>log out</button>
+                </div>
         </div>
       </div>
     </div>
@@ -59,6 +70,5 @@ function MyProfile() {
   }
 
  
-}
 
 export default MyProfile;
