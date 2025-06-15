@@ -1,8 +1,8 @@
 
 import {useState } from "react";
 import { useEffect } from "react";
-
-import NavBar from '../NavBar';
+import SideNav from "./SideNav";
+import SideNavMenu from "./SideNavMenu";
 
 function Products() {
 
@@ -138,22 +138,27 @@ function Products() {
   function Favourite(item){
     setFavList(prevList=> [...prevList,item])
   }
-
+const [isMenu,setIsMenu] = useState(false)
+function toggleMenu(){
+  setIsMenu(prev => !prev)
+}
   
   return (
     <div className="mainContainerProducts">
       <header className="App-header">
-        <NavBar/>
+        
       </header>
+      <div className="nav">
+        {isMenu && <SideNavMenu menuButton={toggleMenu} menuButtonText="Menu" className1='menuButtonStyle'  />}
+      </div>
+      
       <div className="dividerContainer">
       <div className="searchBarContainer">
         
         <div className="searchBar">
           <input type="text" placeholder="Search" value={searchQuery} onChange={(e)=> setSearchQuery(e.target.value)}></input>
         
-          <button>
-            <p>🔍</p>
-          </button>
+          
         </div>
         <div className="searchFilter">
           <button onClick={()=> setCategory("fruit")}>

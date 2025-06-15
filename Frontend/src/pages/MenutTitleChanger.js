@@ -1,11 +1,14 @@
 import react from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-function FontChanger({text = "Main text", className}){
+
+function MenuTitleChanger({menuButton = () => {},text1 = "Main text",className1, text2 = "Main text", className2}){
 const [topOffset, setTopOffset] = useState('50%');
 const [fontSize,setFontSize] = useState(150)
 const [color,setColor]=useState()
+const [menuColor,setMenuColor]=useState()
 const [backgroundColor,setBackgroundColor]=useState()
+//const [menuBackgroundColor,setMenuBackgroundColor]=useState()
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -15,13 +18,17 @@ const [backgroundColor,setBackgroundColor]=useState()
             setFontSize(newSize)
       
       
-      if (scrollY > 1100) {
+      if (scrollY > 1100 || window.innerWidth <= 852 ) {
         setColor("#012001")
-        setBackgroundColor("white")
+        setBackgroundColor("#fefae0")
+        setMenuColor("#012001")
+        //setMenuBackgroundColor("white")
       }
       else{
         setColor(null)
         setBackgroundColor(null)
+        setMenuColor(null)
+        //setMenuBackgroundColor(null)
       }
     };
 
@@ -30,8 +37,22 @@ const [backgroundColor,setBackgroundColor]=useState()
   }, []);
 
   return (
+    
+   <div>
+    <button onClick={menuButton} className={className1}
+        style={{
+        
+        zIndex:2,
+        left: '5%',
+        fontSize:'20px',
+        color:menuColor,
+        //backgroundColor:menuBackgroundColor,
+        //background:menuBackgroundColor
+        }}>{text1}
+    </button>
     <h1
       style={{
+        zIndex:1,
         fontSize: `${fontSize}px`,
         position: 'fixed',
         top: topOffset,
@@ -40,14 +61,12 @@ const [backgroundColor,setBackgroundColor]=useState()
         transition: 'top 0.2s ease-out',
         color:color,
         backgroundColor:backgroundColor,
-        
-        
-
-      }} className={className}
+      }} className={className2}
     >
-      {text}
+      {text2}
       
     </h1>
+     </div>
   );
   }
-export default FontChanger;
+export default MenuTitleChanger;
