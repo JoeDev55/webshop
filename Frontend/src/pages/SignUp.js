@@ -1,10 +1,13 @@
 import react from "react";
 
-import NavBar from '../NavBar';
-import { useNavigate } from "react-router";
 
+import { useNavigate } from "react-router";
+import { useState } from "react";
+import SideNav from "./SideNav";
+import MenuButton from "./MenuButton";
 function SignUp() {
   const navigate = useNavigate()
+  const [isMenu,setIsMenu] = useState(false)
   function toLogIn(){
     navigate('/logIn')
   }
@@ -18,7 +21,7 @@ function SignUp() {
       firstName: formData.get("firstName"),
       lastName: formData.get("lastName"),
       phoneNumber: formData.get("phoneNumber"),
-      age: formData.get("age")
+      birthDate: formData.get("birthDate")
     }
 
     try{
@@ -41,12 +44,14 @@ function SignUp() {
     }
     
   }
+  
   return (
     <div className="mainContainer">
           <header className="App-header">
-            <NavBar/>
+         
           </header>
-    
+           <MenuButton onClick={()=>setIsMenu(prev => !prev)} buttonText={isMenu ? "Close" : "Menu"} className={'menuButton'}/>
+            {isMenu && <SideNav  onClose={()=>setIsMenu(prev => !prev)}/>}
           <div className="signUpContainer" >
     
             
@@ -60,7 +65,7 @@ function SignUp() {
                 <input placeholder="First name" name="firstName"/>
                 <input placeholder="Last name" name="lastName"/>
                 <input placeholder="Phone number" type="tel" name="phoneNumber"/>
-                <input placeholder="Date of birth" name="age"/>
+                <input placeholder="Date of birth" name="birthDate"/>
                 <button type="submit">Submit</button>
               </form>
             

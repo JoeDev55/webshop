@@ -7,6 +7,7 @@ import MyProfile from './pages/MyProfile.js';
 import NotFound from './pages/NotFound.js';
 import SignUp from './pages/SignUp.js';
 import LogIn from './pages/LogIn.js';
+import Checkout from './pages/Checkout.js'
 import { useEffect, useState } from 'react';
 function App() {
 
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
   { path: '/myProfile', element: <MyProfile /> },
   { path: '/signUp', element: <SignUp /> },
   { path: '/logIn', element: <LogIn /> },
+  { path: '/checkout', element: <Checkout /> },
   { path: '*', element: <NotFound /> }
 ]);
 

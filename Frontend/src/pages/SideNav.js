@@ -1,7 +1,7 @@
 import react from "react";
 import { Navigate } from "react-router";
 import { useEffect, useState } from "react";
-function SideNav({onClose=()=>{}}){
+function SideNav({onClick}){
 //const navigate = Navigate()
 
     return(
@@ -9,8 +9,9 @@ function SideNav({onClose=()=>{}}){
 
 
         <div className="sideNavbar">
-      <button onClick={onClose} className="closeBtn">X</button>
+      {/*<button onClick={onClick} className="closeBtn">Close</button>*/}
       <ul>
+        <li><a href="/">Home</a></li>
         <li><a href="/products">Products</a></li>
         <li><a href="/aboutUs">Vegetables</a></li>
         <li><a href="/aboutUs">Fruits</a></li>

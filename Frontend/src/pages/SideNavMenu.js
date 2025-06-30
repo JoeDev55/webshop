@@ -1,8 +1,9 @@
 import react from "react";
-function SideNavMenu({menuButton = () => {},menuButtonText = "Text",className1}){
+function SideNavMenu({onClick,buttonText = "Menu",className1}){
+    
     return(
         <div>
-    <button onClick={menuButton} className={className1}
+    <button onClick={onClick} className={className1}
         style={{
         
         zIndex:2,
@@ -12,7 +13,7 @@ function SideNavMenu({menuButton = () => {},menuButtonText = "Text",className1})
         color:'#012001',
         //backgroundColor:menuBackgroundColor,
         //background:menuBackgroundColor
-        }}>{menuButtonText}
+        }}>{buttonText}
     </button>
     </div>
     )

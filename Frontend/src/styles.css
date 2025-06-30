@@ -122,9 +122,9 @@
     background: none;
     
 }
-.sideNavbar{
-position: fixed;
-  top: 0;
+.sideNavbar {
+  position: fixed;
+  top: 50;
   left: 0;
   width: 100%;
   height: 100%;
@@ -133,6 +133,9 @@ position: fixed;
   z-index: 991;
   padding: 20px;
  
+}
+.sideNavbar ul{
+    margin-top: 50px;
 }
 .sideNavbar li{
     list-style: none;
@@ -279,23 +282,42 @@ position: fixed;
 
 /*LOG IN PAGE STYLES*/
 .logInContainer{
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    margin-top: 54px;
+    
     margin-left: 20%;
     margin-right: 20%;
     display: flex;
-    background-image: url(./media/homebg.jpg);
+    justify-content: center;   /* centers horizontally */
+    align-items: center;  
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 1000px;
+    height: 1000px;
 }
 .logInContainer form input{
-    justify-content: center;
-    display: flex;
+    display: block;
+    
+}
+
+input.email{
+    color: white;
+    background-color: #32746D;
+    
+}
+input.password{
+    color: white;
+    background-color: #32746D;
+}
+
+
+
+.logInCard{
+    background-color: #012001;
+    width:40%;
+    height: 50%;
     align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px  #012001;
 }
 
 /*ABOUT US STYLES*/
@@ -314,10 +336,199 @@ position: fixed;
     min-height: 1000px;
 }
 
+/*CHECKOUT STYLES*/
+.mainContainerCheckout{
+    background-color: #fefae0;
+    min-height: 1000px;
+    padding-top: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.menuButtonCheckout{
+position: fixed;
+  top: 3.5%;
+  left: 5%;
+  z-index: 999;
+  font-size: 20px;
+  border: none;
+  background: none;
+  color: #012001;
+  font-family: 'Raleway', sans-serif;
+    
+}
+.checkoutItems{
+    
+    height: 500px;
+    width: 50%;
+    margin:0 auto;
+    margin-top: 0%;
+    border: #012001 solid 2px;
+    overflow: scroll;
+    overflow-x: hidden;
+    justify-content: center;
+    
+    background-color: #fefae0;
+    ul{
+        width: 75%;
+    }
+    li{
+    list-style: none;
+    font-family: 'Raleway', sans-serif;
+    font-size: large;
+    display: flex;
+    flex-direction: row;
+    div{
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+    padding-left: 2%;
+    padding-right: 2%;
+    }}
+    p :hover{
+        background-color: #012001;
+        color: #fefae0;
+    }
+    
+}
+.totalPrice2{
+    display: flex;
+    flex-direction: column;
+    height: 140px;
+    width: 50%;
+    margin:0 auto;
+    background-color: #012001;
+    border: #012001 solid 2px;
+    border-top: none;
+    justify-content: center;
+    font-family: 'Raleway', sans-serif;
+    
+    span{
+        
+        display: flex;
+        margin-left: 20px;
+        margin-top: 15px;
+        font-size: xx-large;
+        color: #fefae0;
+    }
+    p{
+        display: flex;
+        margin-left: 20px;
+        margin-top: 15px;
+        font-size: medium;
+        color: #fefae0;
+    }
+    }
+.deliveryInfo{
+    font-family: 'Raleway', sans-serif;
+    font-size: x-large;
+    display: flex;
+    flex-direction: column;
+    width:50%;
+    
+    padding-top:2%;
+    border: 5px solid #012001;
+    
+    margin-top: 5%;
+    div{
+        height: 30px;
+        display: flex;
+        
+    }
+    .title{
+        margin-left: 40%;
+        justify-content: center;
+        display:flex ;
+        flex-direction:column;
+    }
+    .options{
+        display: flex;
+        flex-direction: row;
+        gap: 10rem;
+        margin-top: 10%;
+        margin-bottom: 20%;
+        justify-content: center;
+    }
+    
+    button{
+        background-color: #fefae0;
+        border-style: none;
+        border: 2px solid #012001;
+        border-radius: 150px;
+        height: 190px;
+        width: 20%;
+        font-family: 'Raleway', sans-serif;
+        font-size: x-large;
+    }
+    
+    .options :hover{
+        background-color: #012001;
+        color: #fefae0;
+    }
+    
+    
+}
+.addressForm{
+        display: flex;
+        
+    
+}
+.deliveryForm{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 40%;
+    margin-top: 10%;
+    row-gap: 2rem;
+}
+.pickup{
+    flex-direction: column;
+    display: flex;
+    padding-left: 22%;
+    margin-left: 0px;
+}
+.pickupForm{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+    padding-right: 30%;
+    margin-top: 10%;
+    row-gap: 2rem;
+}
+
+.shippingInfo{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin:0 auto;
+    padding-bottom: 10%;
+    padding-top: 10%;
+    
+    justify-content: center;
+    input{
+    width: 100%;
+    padding: 10px; 
+    box-sizing: border-box;
+    border: solid gray 1px ;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    }
+    .namesCityZ{
+        display: flex;
+        gap: 10px;
+        input{
+            flex: 1;
+        }
+    }
+    
+}
 
 /*PRODUCTS STYLES*/
 .mainContainerProducts{
     background-color: #fefae0;
+    font-family: 'Raleway' sans-serif;
+    
 }
 .dividerContainer{
     display: flex;
@@ -325,12 +536,11 @@ position: fixed;
 }
 .searchBarContainer{
     width:20%;
-    height:500px;
+    height:800px;
     margin-left:1%;
     padding-left:1%;
-    margin-top:54px;
+    margin-top:0px;
     position:fixed;
-    
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -341,7 +551,10 @@ position: fixed;
     border-width: 0;
     border-radius: 10px;
     width:100%;
+    color: #fefae0;
+    font-family: 'Raleway' sans-serif;
     
+    font-size: 20px;
     
 }
 .searchBarContainer input{
@@ -350,12 +563,13 @@ position: fixed;
     border-radius: 5px;
     width:100%;
     display: flex;
-    
+    height:50px;
+    font-size: 20px;
 }
 .searchBar{
     display: flex;
     flex-direction: row;
-    height:30px;
+    
 }
 .searchBar input{
     display: flex;
@@ -383,11 +597,12 @@ position: fixed;
     display: flex;
     flex-direction: column;
     margin-top: 54px;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 26%;
+    margin-right: 26%;
     display: flex;
     width:60%;
     /*background-image: url(./media/homebg.jpg);*/
+    
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -410,51 +625,150 @@ position: fixed;
     display: flex;
     flex-direction: column;
 }
+.productDesc h4{
+    font-family: 'Raleway' sans-serif;
+    font-size: 15px;
+}
+
 .productDesc p{
     display: flex;
+    font-family: 'Raleway' sans-serif;
+    font-size: 15px;
 }
 .productIndiv {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin:6px;
+    margin:10px;
     background-color: white;
-    border-width: 0;
+    border-radius: 5px;
 }
 .productIndiv:hover{
-    border: solid #012001 1px;
-    border-radius: 5px;
-    margin:5px;
-    box-shadow: 2px 2px 5px #012001;
+   
+    
+    margin:10px;
+    
 }
 .listContainer{
    
     width:20%;
-    height:500px;
+    height:700px;
     margin-right:10px;
-    background-color: #012001;
+    background-color: #fefae0;
     margin-top:60px;
     display: flex;
     position: fixed;
     right:0;
     top:60;
     flex-direction: column;
+    border-radius: 10px;
+    font-family: 'Raleway' sans-serif;
+    font-weight: 500;
+    border: #012001 solid 5px;
 }
 .listContainer li{
     display: flex;
     flex-direction: row;
-    color:white
+    color:white;
+    justify-content: space-between;
+    background-color: #012001;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    padding-left: 10px;
+    width: 90%;
 }
-.listContainer li button{
+
+.totalPrice{
+    color:#fefae0;
+    font-family: 'Raleway' sans-serif;
+    font-size: 15px;
+}
+.amountButton button{
     background-color: white;
     border: 0px;
-    border-radius: 20%;
-    height:30px;
-    align-content: center;
+    width:30px;
+    height: 30px;
+    margin-top:12px;
+    margin-left: 10px;
+    border-radius: 10px;    
+    color: #012001;
+    font-size: 15px;
+    
+}
+.amountButton{
+    display: flex;
+    
+    
+}
+.amountBox{
+    display: flex;
+    flex-direction: flex-end;
+    margin-right: 5%;
+    margin-left: 5%;
+    
+}
+
+
+.amountButton  :hover{
+    background-color: #87A330;
+    box-shadow: inset 0px 0px   ;
+    color: #fefae0;
+    font-size: 15px;
+}
+.listContainer li button p{
+    margin-top: 6px;
+    
 }
 .counter{
     padding-right: 3px;
 }
+.list{
+    
+    height: 87%;
+    overflow: scroll;
+    overflow-x: hidden;
+    
+    display: flex;
+    flex-direction: column;
+    
+}
+.list p{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.listButtons{
+    background-color: #012001;
+    position: fixed;
+    height: 10%;
+    bottom:20%;
+    display: flex;
+    flex-direction: row;
+    padding-left: 3%;
+    padding-right: 3%;
+    border-top: 2px #fefae0 solid;
+    
+}
+.listButtons button{
+    display: flex;
+    margin-left: 0%;
+    margin-right:20%;
+    background-color: #fefae0;
+    border: none;
+    border-radius: 10px;
+    height: 60px;
+    margin-top: 20px;
+    font-family: 'Raleway' sans-serif;
+    font-size: 20px;
+    
+}
+.listButtons button p{
+   margin-top:2px;
+   margin-bottom:2px;
+}
+#checkoutButton{
+    padding-top: 5%;
+}
+
 .menuButtonStyle{
     text-decoration: none;
     font-family:'Raleway', sans-serif;
@@ -464,4 +778,57 @@ position: fixed;
     top:5%;
     border: none;
     background: none;
+}
+.menuButtonHome{
+position: fixed;
+  top: 3.5%;
+  left: 5%;
+  z-index: 999;
+  font-size: 20px;
+  border: none;
+  background: none;
+  color: #fefae0;
+  font-family: 'Raleway', sans-serif;
+    
+}
+.menuButtonProducts{
+position: fixed;
+  top: 3.5%;
+  left: 5%;
+  z-index: 999;
+  font-size: 20px;
+  border: none;
+  background: none;
+  color: #012001;
+  font-family: 'Raleway', sans-serif;
+    
+}
+.orderButton{
+    position: fixed;
+  top: 3.5%;
+  right: 5%;
+  z-index: 999;
+  font-size: 20px;
+  border: none;
+  background: none;
+  color: #fefae0;
+  font-family: 'Raleway', sans-serif;
+    
+}
+.orderButton :hover{
+    color: #012001;
+    background-color: #fefae0;
+}
+
+.menuButtonLogIn{
+position: fixed;
+  top: 3.5%;
+  left: 5%;
+  z-index: 999;
+  font-size: 20px;
+  border: none;
+  background: none;
+  color: #012001;
+  font-family: 'Raleway', sans-serif;
+    
 }

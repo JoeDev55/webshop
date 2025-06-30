@@ -1,16 +1,18 @@
 
 import {useState } from "react";
 import { useEffect } from "react";
+import MenuButton from "./MenuButton";
 import SideNav from "./SideNav";
-import SideNavMenu from "./SideNavMenu";
+import { useNavigate } from "react-router";
 
 function Products() {
-
+  const navigate = useNavigate()
   const [products, setProducts] = useState([])
   const [shoppingList,setShoppingList] = useState([])
   const [category,setCategory]= useState("all")
   const [searchQuery,setSearchQuery] = useState('')
   const [favList,setFavList]=useState([])
+  const [totalPrice,setTotalPrice] = useState(0)
   //const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
   const [searchResults, setSearchResults] = useState([]);
   useEffect(() => {
@@ -57,22 +59,23 @@ function Products() {
     */
    
    
-   const exists = shoppingList.find(i=> i._id === item._id)
+   const exists = shoppingList.find(i=> i.id === item.id)
    if (exists) {
     const updatedList = shoppingList.map(i =>
-      i._id === item._id
+      i.id === item.id
         ? { ...i, quantity: (i.quantity || 1) + 1 }
         : i
         
     );
     setShoppingList(updatedList);
     console.log(item.quantity)
-    
+    setTotalPrice(totalPrice + item.price)
    }
    else {
     
     setShoppingList([...shoppingList,{...item,quantity: 1}]);
     console.log(item.quantity)
+    setTotalPrice(totalPrice + item.price)
   }
    
     
@@ -80,15 +83,15 @@ function Products() {
   }
   function Remove(item){
     if (item.quantity <=0 || item.quantity === 1) {
-      const removeItem = shoppingList.filter(i=> i._id !== item._id)
+      const removeItem = shoppingList.filter(i=> i.id !== item.id)
       setShoppingList(removeItem)
       console.log(item.quantity)
-      
+      setTotalPrice(totalPrice-item.price)
      
     }
     else if(item.quantity >1){
       const updatedList = shoppingList.map(i =>
-      i._id === item._id
+      i.id === item.id
         ? { ...i, quantity: Math.max((i.quantity || 1) - 1 , 0)}
         : i
         
@@ -96,6 +99,7 @@ function Products() {
     
     setShoppingList(updatedList);
     console.log(item.quantity)
+    setTotalPrice(totalPrice-item.price)
     }
     //console.log(shoppingList)
   }
@@ -134,14 +138,16 @@ function Products() {
     searchQuery.trim() !== ""
       ? searchResults
       : products;
-    
+    console.log('searchQuery:', searchQuery);
+console.log('searchResults:', searchResults);
+
+console.log('productsToDisplay:', productsToDisplay);
   function Favourite(item){
     setFavList(prevList=> [...prevList,item])
   }
 const [isMenu,setIsMenu] = useState(false)
-function toggleMenu(){
-  setIsMenu(prev => !prev)
-}
+
+
   
   return (
     <div className="mainContainerProducts">
@@ -149,7 +155,8 @@ function toggleMenu(){
         
       </header>
       <div className="nav">
-        {isMenu && <SideNavMenu menuButton={toggleMenu} menuButtonText="Menu" className1='menuButtonStyle'  />}
+        <MenuButton onClick={()=>setIsMenu(prev => !prev)} buttonText={isMenu ? "Close" : "Menu"} className={'menuButtonProducts'}/>
+      {isMenu && <SideNav  onClose={()=>setIsMenu(prev => !prev)}/>}
       </div>
       
       <div className="dividerContainer">
@@ -157,10 +164,13 @@ function toggleMenu(){
         
         <div className="searchBar">
           <input type="text" placeholder="Search" value={searchQuery} onChange={(e)=> setSearchQuery(e.target.value)}></input>
-        
-          
         </div>
+
+
         <div className="searchFilter">
+          <button onClick={()=> setCategory("all")} >
+            <p>Reset filters</p>
+          </button>
           <button onClick={()=> setCategory("fruit")}>
             <p>Fruits</p>
           </button>
@@ -176,9 +186,7 @@ function toggleMenu(){
           <button onClick={()=> setCategory("specialty")}>
             <p>Specialty</p>
           </button>
-          <button onClick={()=> setCategory("all")} >
-            <p>Reset filters</p>
-          </button>
+          
         </div>
     
 
@@ -191,7 +199,7 @@ function toggleMenu(){
 
          <div className="products">
                 {productsToDisplay.map(item => (
-          <button key={item._id} className="productIndiv" onClick={()=> Add(item)}>
+          <button key={item.id} className="productIndiv" onClick={()=> Add(item)}>
             <div key={item.img} className="productImg">
               <img  src={`http://localhost:3000/${item.img}`} alt={item.name}  />  
             </div>
@@ -204,29 +212,47 @@ function toggleMenu(){
         </div>
       </div>
       <div className="listContainer">
-        <ul>
+        
+        <ul className="list">
+          
           {shoppingList.map(item=>(
             
-          <li key={item._id}>
+          <li key={item.id}>
             
             
-            <p id={item._id}>{item.quantity}x  </p>
-            <p>{item.name}</p>
-            <button key={item.name} onClick={() => Remove(item)}>
+            
+            <p>  {item.name}</p>
+            <div className="amountBox">
+            <div className="amountButton">
+            <button  key={item.name} onClick={() => Remove(item)}>
               <p>-</p>
             </button>
-            <button key={item._id} onClick={() => Add(item)}>
+            </div>
+            <p id={item.id}>{item.quantity}</p>
+            <div className="amountButton">
+            <button key={item.id} onClick={() => Add(item)}>
               <p>+</p>
             </button>
+            </div>
+            </div>
           </li>
           
           )) 
             
           }
         </ul>
-        <div>
-          <button onClick={Clear}>
+        
+        <div className="listButtons">
+          <div className="totalPrice">
+            <p>Subtotal: </p>
+            <p>{totalPrice}</p>
+            
+          </div>
+          <button id="clearButton"  onClick={Clear}>
             <p>Clear shoppinglist</p>
+          </button>
+          <button id="checkoutButton" onClick={()=>{navigate('/checkout', {state: {shoppingList, totalPrice}})}}>
+            <p>Checkout</p>
           </button>
         </div>
         

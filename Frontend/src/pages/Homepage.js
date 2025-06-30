@@ -11,6 +11,7 @@ import Products from "./Products";
 import MenuTitleChanger from "./MenutTitleChanger";
 import menu from '../media/menu.png' 
 import SideNav from "./SideNav";
+import MenuButton from "./MenuButton";
 function Homepage() {
   const navigate = useNavigate()
   function toProducts(){
@@ -21,16 +22,22 @@ function toProfile(){
 }
 
 const [isMenu,setIsMenu] = useState(false)
-function toggleMenu(){
-  setIsMenu(prev => !prev)
-}
+
   return (
-    <div className="mainContainer"  >
+    <div className="mainContainer"  >   
       
       <div className="headerContainer">
-        <MenuTitleChanger menuButton={toggleMenu}  text1="Menu" text2="eGrocer" className1='menuText'className2='whiteText'/>
-        {isMenu && <SideNav  onClose={()=> setIsMenu(false)}/>}
+
+
+        <MenuTitleChanger  text="eGrocer" className='whiteText'/>
+        
+        
       </div>
+       <MenuButton onClick={()=>setIsMenu(prev => !prev)} clickEffect='true' scrollEffect='true' buttonText={isMenu ? "Close" : "Menu"} className={'menuButtonHome'}/>
+      {isMenu && <SideNav  onClose={()=>setIsMenu(prev => !prev)}/>}
+
+ 
+        <MenuButton onClick={()=>{navigate('/products')}} scrollEffect='true' buttonText={'Order'} className={'orderButton'}/>
       
       <div className="homeImg4">
         <img src={homeimg4} alt="img"></img>

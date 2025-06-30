@@ -2,11 +2,11 @@ import react from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-function MenuTitleChanger({menuButton = () => {},text1 = "Main text",className1, text2 = "Main text", className2}){
+function MenuTitleChanger({text = "", className}){
 const [topOffset, setTopOffset] = useState('50%');
 const [fontSize,setFontSize] = useState(150)
 const [color,setColor]=useState()
-const [menuColor,setMenuColor]=useState()
+//const [menuColor,setMenuColor]=useState()
 const [backgroundColor,setBackgroundColor]=useState()
 //const [menuBackgroundColor,setMenuBackgroundColor]=useState()
   useEffect(() => {
@@ -21,13 +21,14 @@ const [backgroundColor,setBackgroundColor]=useState()
       if (scrollY > 1100 || window.innerWidth <= 852 ) {
         setColor("#012001")
         setBackgroundColor("#fefae0")
-        setMenuColor("#012001")
+        //setMenuColor("#012001")
         //setMenuBackgroundColor("white")
       }
       else{
         setColor(null)
         setBackgroundColor(null)
-        setMenuColor(null)
+        
+        //setMenuColor(null)
         //setMenuBackgroundColor(null)
       }
     };
@@ -39,7 +40,7 @@ const [backgroundColor,setBackgroundColor]=useState()
   return (
     
    <div>
-    <button onClick={menuButton} className={className1}
+    {/*<button onClick={menuButton} className={className1}
         style={{
         
         zIndex:2,
@@ -49,7 +50,8 @@ const [backgroundColor,setBackgroundColor]=useState()
         //backgroundColor:menuBackgroundColor,
         //background:menuBackgroundColor
         }}>{text1}
-    </button>
+    </button>*/}
+    
     <h1
       style={{
         zIndex:1,
@@ -61,9 +63,9 @@ const [backgroundColor,setBackgroundColor]=useState()
         transition: 'top 0.2s ease-out',
         color:color,
         backgroundColor:backgroundColor,
-      }} className={className2}
+      }} className={className}
     >
-      {text2}
+      {text}
       
     </h1>
      </div>
