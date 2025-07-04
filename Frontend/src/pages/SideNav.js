@@ -13,12 +13,6 @@ function SideNav({onClick}){
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/products">Products</a></li>
-        <li><a href="/aboutUs">Vegetables</a></li>
-        <li><a href="/aboutUs">Fruits</a></li>
-        <li><a href="/aboutUs">Nuts</a></li>
-        <li><a href="/aboutUs">Dairy</a></li>
-        <li><a href="/aboutUs">Meat</a></li>
-        <li><a href="/aboutUs">About Us</a></li>
         <li><a href="/login">Login</a></li>
         <li><a href="/signup">Sign up</a></li>
         

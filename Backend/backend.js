@@ -36,6 +36,37 @@ app.get('/productList', (req, res) => {
     res.json(results);
   });
 });
+app.get('/fruitList', (req, res) => {
+  db.query('SELECT * FROM products WHERE category = "fruit"', (err, results) => {
+    if (err) return res.status(500).json({ message: 'DB error' });
+    res.json(results);
+  });
+});
+app.get('/vegetableList', (req, res) => {
+  db.query('SELECT * FROM products WHERE category = "vegetable"', (err, results) => {
+    if (err) return res.status(500).json({ message: 'DB error' });
+    res.json(results);
+  });
+});
+app.get('/meatList', (req, res) => {
+  db.query('SELECT * FROM products WHERE category = "meat"', (err, results) => {
+    if (err) return res.status(500).json({ message: 'DB error' });
+    res.json(results);
+  });
+});
+app.get('/dairyList', (req, res) => {
+  db.query('SELECT * FROM products WHERE category = "dairy"', (err, results) => {
+    if (err) return res.status(500).json({ message: 'DB error' });
+    res.json(results);
+  });
+});
+app.get('/specialtyList', (req, res) => {
+  db.query('SELECT * FROM products WHERE category = "specialty"', (err, results) => {
+    if (err) return res.status(500).json({ message: 'DB error' });
+    res.json(results);
+  });
+});
+
 
 // Get products by category
 /*app.get('/:categoryList', (req, res) => {
@@ -50,11 +81,14 @@ app.get('/productList', (req, res) => {
 app.get('/filteredProducts', (req, res) => {
     
     const q = req.query.q || '';
-    db.query('SELECT * FROM products WHERE LOWER(name) LIKE ?',[`%${q.toLowerCase()}%`],(err,[rows])=>{
-    if (err) return console.log(err); res.status(500).json({ message: 'DB error' })
+    db.query('SELECT * FROM products WHERE LOWER(name) LIKE ?',[`%${q.toLowerCase()}%`],(err,rows)=>{
+    if (err){
+    console.log(err);
+   res.status(500).json({ message: 'DB error' })
         
-
-    console.log([rows])
+      }
+    console.log(rows)
+    res.json(rows)
     }
 )
     console.log('search query', q)

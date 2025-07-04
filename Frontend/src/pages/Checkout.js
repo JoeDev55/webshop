@@ -74,8 +74,11 @@ function Checkout(){
 
             </div>
             */}
+            
             <div className="shippingInfo">
                 <div className="email">
+                    <span>Already have an account? </span>
+                    <a href="http://localhost:3001/login">Log in</a>
                     <input placeholder="E-mail"/>
                 </div>
                 <div className="namesCityZ">

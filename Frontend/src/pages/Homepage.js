@@ -4,7 +4,7 @@ import homeimg2 from '../media/market.jpg';
 import homeimg3 from '../media/homebg.jpg';
 import homeimg4 from '../media/greenbg.jpg';
 import NavBar from '../NavBar';
-import '../styles.css';
+import './Homepage.css';
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 import Products from "./Products";

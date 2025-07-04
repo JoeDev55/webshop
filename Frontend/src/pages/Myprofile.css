@@ -1,0 +1,28 @@
+/*MY PROFILE STYLES*/
+
+.profileContainer{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 54px;
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    background-image: url(../media/homebg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 1000px;
+}
+.signInStatus{
+    justify-content: center;
+    display: flex;
+    color: white;
+    font-size: xx-large;
+}
+.signUp{
+     justify-content: center;
+    display: flex;
+    color: white;
+    font-size: xx-large;
+}

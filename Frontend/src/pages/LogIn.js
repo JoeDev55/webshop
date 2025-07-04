@@ -6,7 +6,7 @@ import { useState } from 'react';
 import MyProfile from "./MyProfile";
 import SideNav from './SideNav';
 import MenuButton from './MenuButton';
-
+import './Login.css';
 function LogIn() {
     const navigate = useNavigate()
     const [isMenu,setIsMenu] = useState(false)

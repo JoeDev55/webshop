@@ -2,7 +2,7 @@ import react, { useEffect, useState } from "react";
 import NavBar from '../NavBar';
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router";
-
+import './Myprofile.css';
 function MyProfile() {
   const signedIn=false
   const navigate = useNavigate()

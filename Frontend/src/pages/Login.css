@@ -1,0 +1,39 @@
+/*LOG IN PAGE STYLES*/
+.logInContainer{
+    
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    justify-content: center;   /* centers horizontally */
+    align-items: center;  
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 1000px;
+}
+.logInContainer form input{
+    display: block;
+    
+}
+
+input.email{
+    color: white;
+    background-color: #32746D;
+    
+}
+input.password{
+    color: white;
+    background-color: #32746D;
+}
+
+
+
+.logInCard{
+    background-color: #012001;
+    width:40%;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px  #012001;
+}
