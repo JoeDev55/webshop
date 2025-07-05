@@ -7,6 +7,7 @@ import MyProfile from "./MyProfile";
 import SideNav from './SideNav';
 import MenuButton from './MenuButton';
 import './Login.css';
+import Cart from "./Cart";
 function LogIn() {
     const navigate = useNavigate()
     const [isMenu,setIsMenu] = useState(false)
@@ -56,6 +57,7 @@ function LogIn() {
           <header className="App-header">
             
           </header>
+          
           <MenuButton onClick={()=>setIsMenu(prev => !prev)} buttonText={isMenu ? "Close" : "Menu"} className={'menuButtonLogIn'}/>
             {isMenu && <SideNav  onClose={()=>setIsMenu(prev => !prev)}/>}
 

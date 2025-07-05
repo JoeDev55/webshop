@@ -6,6 +6,7 @@ import SideNav from "./SideNav";
 import { useNavigate } from "react-router";
 import './Products.css';
 import upArrow from '../media/up-arrow.png';
+import Cart from "./Cart";
 function Products() {
   const navigate = useNavigate()
   const [products, setProducts] = useState([])
@@ -18,6 +19,7 @@ function Products() {
   const [filtersVisible,setFiltersVisible] = useState(false)
   //const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
   const [searchResults, setSearchResults] = useState([]);
+  const [moveCart,setMoveCart] = useState()
   useEffect(() => {
     
     const endpoints ={
@@ -106,10 +108,7 @@ function Products() {
     }
     //console.log(shoppingList)
   }
-  function Clear(){
-    setShoppingList([])
-    setSearchQuery('')
-  }
+  
   function RemoveItem(item){
     const removeItem = shoppingList.filter(i=> i.id !== item.id)
       setShoppingList(removeItem)
@@ -176,15 +175,18 @@ useEffect(() => {
     });
   };
 
+const toggleCart = () => {
+    setMoveCart(prev=> !prev)
+    
+}
 
-const toggleFilters = () => setFiltersVisible(prev=> !prev)
-const toggleList = () => setListVisible(prev=> !prev)
 
   return (
     <div className="mainContainerProducts">
       <header className="App-header">
         
       </header>
+      
       <div className="nav">
         <MenuButton onClick={()=>setIsMenu(prev => !prev)} buttonText={isMenu ? "Close" : "Menu"} className={'menuButtonProducts'}/>
       {isMenu && <SideNav  onClose={()=>setIsMenu(prev => !prev)}/>}
@@ -195,6 +197,7 @@ const toggleList = () => setListVisible(prev=> !prev)
           <input type="text" placeholder="Search" value={searchQuery} onChange={(e)=> setSearchQuery(e.target.value)}></input>
         </div>
       </div>
+      
       
       <div className="dividerContainer">
       <div className="searchBarContainer">
@@ -255,8 +258,21 @@ const toggleList = () => setListVisible(prev=> !prev)
           <img src={upArrow}/>
         </button>
       )}
-     
-      <div className="listContainer">
+      <Cart
+      shoppingList={shoppingList}
+      totalPrice={totalPrice}
+      Add={Add}
+      Remove={Remove}
+      RemoveItem={RemoveItem}
+      toggleCart={toggleCart} // or create a new toggle if needed
+      moveCart={moveCart ? "0px" : "-900px"}
+      />
+      {/*
+      <button className="cartButton" onClick={() => setListVisible(!listVisible)}>
+      {listVisible ? "Close" : "Cart"}
+      </button>
+      {listVisible && (
+      <div className={`listContainer ${listVisible ? "open" : ""}`}>
         <div className="listHeader">
           <span>Your list:</span>
         </div>
@@ -319,9 +335,7 @@ const toggleList = () => setListVisible(prev=> !prev)
             
           </div>
           <div className="listButtons">
-          <button id="clearButton"  onClick={Clear}>
-            <p>Clear shoppinglist</p>
-          </button>
+          
           <button id="checkoutButton" onClick={()=>{navigate('/checkout', {state: {shoppingList, totalPrice}})}}>
             <p>Checkout</p>
           </button>
@@ -329,7 +343,8 @@ const toggleList = () => setListVisible(prev=> !prev)
         </div>
         
       </div>
-      
+      )}
+      */}
       </div>
     </div>
   );

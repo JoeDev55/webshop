@@ -196,7 +196,5 @@
     background-color: #012001;
 }
 @media (max-width: 400px) {
-    .dividerContainer{
-        flex-direction: row;
-    }
+    
 }
