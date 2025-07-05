@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import './Products.css';
 import upArrow from '../media/up-arrow.png';
 import Cart from "./Cart";
+import ProductOverlay from "./ProductOverlay";
 function Products() {
   const navigate = useNavigate()
   const [products, setProducts] = useState([])
@@ -179,8 +180,8 @@ const toggleCart = () => {
     setMoveCart(prev=> !prev)
     
 }
-
-
+const [showOverlay,setShowOverlay] = useState(false)
+const [selectedItem,setSelectedItem] = useState(null)
   return (
     <div className="mainContainerProducts">
       <header className="App-header">
@@ -236,8 +237,11 @@ const toggleCart = () => {
       <div className="productsContainer" >
         
          <div className="products">
+          
+          
                 {productsToDisplay.map(item => (
-          <button key={item.id} className="productIndiv" onClick={()=> Add(item)}>
+          
+          <button key={item.id} className="productIndiv" onClick={()=>{setShowOverlay(true); setSelectedItem(item)}}>
             <div key={item.img} className="productImg">
               <img  src={`http://localhost:3000/${item.img}`} alt={item.name}  />  
             </div>
@@ -247,6 +251,8 @@ const toggleCart = () => {
           </div>
           </button>
             ))}
+           
+            {showOverlay && (<ProductOverlay  item={selectedItem} onClose={()=>setShowOverlay(false)}/>)}
         </div>
       </div>
      

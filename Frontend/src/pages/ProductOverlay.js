@@ -1,21 +1,22 @@
-
-function ProductOverlay(){
-
+import './ProductOverlay.css'
+function ProductOverlay({onClose, item}){
+    if(!item) return null
 return(
-    <div>
-        <div>
-            <div>
-                kép
+    <div className="main">
+        <button onClick={onClose} className='closeButton'>✕</button>
+        <div className="row">
+            <div className="image">
+                <img src={`http://localhost:3000/${item.img}`}/>
             </div>
-            <div>
-                leiras/nev
+            <div className="description">
+                <span>{item.name}</span>
             </div>
         </div>
 
 
-        <div>
-            <div>
-                kg/dkg
+        <div className="row">
+            <div >
+               <span>{item.amount}</span> 
             </div>
             <div>
                 mennyiseg
@@ -23,7 +24,7 @@ return(
         </div>
 
 
-        <div>
+        <div className="row">
             Add button
         </div>
     </div>
