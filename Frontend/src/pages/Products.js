@@ -46,9 +46,14 @@ function Products() {
 }, [shoppingList]);
 
   
+ function Add_one(){
+
+ }
+ function Remove_one(){
+
+ }
  
- 
-  function Add(item){
+  function Add(item, amount){
     
     /*const added = shoppingList.find(i=> i.product?._id === item._id)
     if (added) {
@@ -69,19 +74,19 @@ function Products() {
    if (exists) {
     const updatedList = shoppingList.map(i =>
       i.id === item.id
-        ? { ...i, quantity: (i.quantity || 1) + 1 }
+        ? { ...i, quantity: (i.quantity || 1) + amount }
         : i
         
     );
     setShoppingList(updatedList);
     console.log(item.quantity)
-    setTotalPrice(totalPrice + item.price)
+    setTotalPrice(totalPrice + amount * item.price)
    }
    else {
     
-    setShoppingList([...shoppingList,{...item,quantity: 1}]);
+    setShoppingList([...shoppingList,{...item,quantity: amount}]);
     console.log(item.quantity)
-    setTotalPrice(totalPrice + item.price)
+    setTotalPrice(totalPrice + amount * item.price)
   }
    
     
@@ -92,7 +97,10 @@ function Products() {
       const removeItem = shoppingList.filter(i=> i.id !== item.id)
       setShoppingList(removeItem)
       console.log(item.quantity)
-      setTotalPrice(totalPrice-item.price)
+      if (totalPrice != 0) {
+        setTotalPrice(totalPrice-item.price)
+      }
+      
      
     }
     else if(item.quantity >1){
@@ -182,6 +190,10 @@ const toggleCart = () => {
 }
 const [showOverlay,setShowOverlay] = useState(false)
 const [selectedItem,setSelectedItem] = useState(null)
+
+
+
+
   return (
     <div className="mainContainerProducts">
       <header className="App-header">
@@ -252,7 +264,23 @@ const [selectedItem,setSelectedItem] = useState(null)
           </button>
             ))}
            
-            {showOverlay && (<ProductOverlay  item={selectedItem} onClose={()=>setShowOverlay(false)}/>)}
+            {showOverlay && (
+              <>
+              <div 
+      className="overlayBackdrop" 
+      onClick={() => setShowOverlay(false)}
+    />
+    <ProductOverlay  item={selectedItem} onClose={()=>setShowOverlay(false)} onClick={(amount)=>{Add(selectedItem,amount);setMoveCart("0px"); setShowOverlay(false) }}/>
+      </>)}
+      <Cart
+      shoppingList={shoppingList}
+      totalPrice={totalPrice}
+      Add={Add}
+      Remove={Remove}
+      RemoveItem={RemoveItem}
+      toggleCart={toggleCart} // or create a new toggle if needed
+      moveCart={moveCart ? "0px" : "-900px"}
+      />
         </div>
       </div>
      
@@ -264,15 +292,7 @@ const [selectedItem,setSelectedItem] = useState(null)
           <img src={upArrow}/>
         </button>
       )}
-      <Cart
-      shoppingList={shoppingList}
-      totalPrice={totalPrice}
-      Add={Add}
-      Remove={Remove}
-      RemoveItem={RemoveItem}
-      toggleCart={toggleCart} // or create a new toggle if needed
-      moveCart={moveCart ? "0px" : "-900px"}
-      />
+      
       {/*
       <button className="cartButton" onClick={() => setListVisible(!listVisible)}>
       {listVisible ? "Close" : "Cart"}

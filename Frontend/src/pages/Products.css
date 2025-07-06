@@ -3,7 +3,7 @@
 .mainContainerProducts{
     background-color: #fefae0;
     font-family: 'Raleway' sans-serif;
-    
+    user-select: none;
 }
 .pageTitle{
     height: 100px;
@@ -41,9 +41,16 @@
     display: flex;
     font-size: 18px;
     
-    transition: all 0.5s ease-out;
+    
 }
-
+.searchFilter  :hover{
+    cursor: pointer;
+}
+.searchFilter :hover{
+    background-color: #012001;
+    color: #fefae0;
+    
+}
 .searchBar{
     
     flex-direction: row;
@@ -148,7 +155,7 @@
     z-index: 1000;
     position: fixed;
     bottom:5%;
-    left:74%;
+    left:65%;
     background-color: #fefae0;
     
     height: 50px;
@@ -171,7 +178,7 @@
     background: none;
     color: #012001;
     font-family: 'Raleway', sans-serif;
-    z-index: 9000;
+    z-index: 1000;
 }
 .cartButton :hover{
     cursor: pointer;
@@ -289,7 +296,16 @@
 .removeButton :hover{
     cursor: pointer
 }
-
+.overlayBackdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* dark semi-transparent overlay */
+    backdrop-filter: blur(5px);     /* optional: adds blur effect */
+    z-index: 80;
+}
 .removeButton span{
     font-size: large;
 }

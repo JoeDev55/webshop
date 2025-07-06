@@ -1,23 +1,25 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router"
 function Cart({ shoppingList = [], totalPrice, Add, Remove, RemoveItem, toggleCart, moveCart }){
  const navigate = useNavigate()
 
-
-return(<div>
+  
+return(
+<div>
     <button onClick={toggleCart} style={{
         position: 'fixed', 
         top: '3.5%',
         right: '3%',
         border:'none',
         color:'#1012001' ,
-        backgroundColor:'#fefae0',
+        backgroundColor:'transparent',
         fontSize:'large',
         fontFamily: 'Raleway',
         transition: 'background-color 0.5s ease',
-        cursor:'pointer'
+        cursor:'pointer',
+        zIndex:'999'
     }}>
-        <span>Cart</span>
+        <span style={{zIndex:'1000'}}>Cart</span>
     </button>
     <div className="listContainer" style={{
         position:'fixed',
@@ -25,7 +27,7 @@ return(<div>
         top:'0',
         width:'30%',
         transition: "right 0.5s ease-in-out",
-        zIndex:'10000'
+        zIndex:'1000'
 
     }}>
         <div className="listHeader" style={{display:'flex', flexDirection:'row'}}>
@@ -75,7 +77,7 @@ return(<div>
             <span id={item.id}>{item.quantity}</span>
 
             <div className="amountButton">
-            <button key={item.id} onClick={() => Add(item)}>
+            <button key={item.id} onClick={() => Add(item,1)}>
               <span>+</span>
             </button>
             </div>
@@ -83,7 +85,7 @@ return(<div>
             
             </div>
             <div className="removeButton">
-              <button key={item.id} onClick={()=>{RemoveItem(item)}}>
+              <button key={item.id} onClick={()=>{RemoveItem(item,1)}}>
                 <span>✕</span>
               </button>
             
