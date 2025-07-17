@@ -126,6 +126,33 @@ app.post('/signup', (req, res) => {
   });
 });
 
+app.post('/favouriteItem', (req,res)=>{
+    console.log("req.body:", req.body); // Debug print
+  db.query('INSERT INTO favourites VALUES (NULL, ?, ?)',[req.body.user_id, req.body.product_id] ),
+  (err, rows, fields) => {
+  if (err) {
+    console.log(err)
+    return res.status(500).json({message : 'db error'})
+  }
+  else{
+    console.log(rows)
+    return res.status(200).json({message:"item added to favourites"})
+  }
+}})
+
+app.delete('/favouriteItemDel', (req,res)=>{
+    console.log("req.body:", req.body); // Debug print
+  db.query('DELETE * FROM favourites WHERE user_id = ? AND product_id = ?',[req.body.user_id, req.body.product_id] ),
+  (err, rows, fields) => {
+  if (err) {
+    console.log(err)
+    return res.status(500).json({message : 'db error'})
+  }
+  else{
+    console.log(rows)
+    return res.status(200).json({message:"item deleted from favourites"})
+  }
+}})
 // Login
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
@@ -143,6 +170,8 @@ app.post('/login', (req, res) => {
 
     const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: '1h' });
     res.status(201).json({ message: 'login successful', token, email });
+    const token = jwt.sign({ email: user.email}, JWT_SECRET, { expiresIn: '1h' });
+    res.status(201).json({ message: 'login successful', token, email: user.email });
   });
 });
 
@@ -158,6 +187,9 @@ app.get('/user/profile', (req, res) => {
     const decoded = jwt.verify(token, JWT_SECRET);
     db.query('SELECT id, email, firstName, lastName, phoneNumber, age FROM users WHERE email = ?', [decoded.email], (err, results) => {
       if (err) return res.status(500).json({ message: 'DB error' });
+    console.log("Decoded email",decoded.email)
+    db.query('SELECT id, email, firstName, lastName, phoneNumber, birthDate FROM users WHERE email = ?', [decoded.email], (err, results) => {
+      if (err) {console.log("db error",err);return res.status(500).json({ message: 'DB error' })};
       if (results.length === 0) return res.status(404).json({ message: 'User not found' });
       res.json(results[0]);
     });
@@ -165,6 +197,45 @@ app.get('/user/profile', (req, res) => {
     return res.status(401).json({ message: 'Invalid or expired token' });
   }
 });
+
+
+app.post('/orderInfo', (req,res)=>{
+    console.log("req.body:", req.body);
+     const itemsJSON = JSON.stringify(req.body.items);
+  db.query('INSERT INTO orders VALUES (NULL, ?,?,?,?,?,?,?,?,?)',[req.body.email, req.body.firstName,req.body.lastName,req.body.address,req.body.apartment,req.body.city,req.body.zipCode,req.body.phone,itemsJSON],
+  (err, rows, fields) => {
+  if (err) {
+    console.log(err)
+    console.log(req.body)
+    return res.status(500).json({message : 'db error'})
+  }
+  else{
+    console.log(rows)
+    return res.status(200).json({message:"order added successfully "})
+  }
+})})
+
+app.post("/create-checkout-session", async (req, res) => {
+  const cartItems = req.body.cartItems;
+  const line_items = cartItems.map(item => ({
+    price_data: {
+      currency: "HUF",
+      product_data: { name: item.name },
+      unit_amount: item.price * 100,
+    },
+    quantity: item.quantity,
+  }));
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    line_items,
+    mode: "payment",
+    success_url: "http://localhost:3001/success",
+    cancel_url: "http://localhost:3001/cancel",
+  });
+
+  res.json({ id: session.id });
+});
+
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
