@@ -1,18 +1,28 @@
 /*PRODUCTS STYLES*/
 @media (max-width: 1920px){
 .mainContainerProducts{
-    background-color: #fefae0;
+    background-color: #07644B;
     font-family: 'Raleway' sans-serif;
     user-select: none;
 }
-.pageTitle{
+.pageTitle {
     height: 100px;
     line-height: 100px;
     text-align: center;
+    margin-bottom: 3%;
+}
+.pageTitle button{
+    border: none;
+    background-color: transparent;
     font-size: xx-large;
     font-family: 'Raleway';
-    color: #012001;
-    margin-bottom: 3%;
+    color: white;
+}
+.pageTitle :hover{
+    cursor: pointer;
+}
+.nav :hover{
+    cursor: pointer;
 }
 .dividerContainer{
     display: flex;
@@ -32,8 +42,8 @@
     
 }
 .searchBarContainer button{
-    background-color:#fefae0;
-    border-width: 0;
+    background-color:white;
+    border: 2px solid #012001;
     border-radius: 10px;
     width:30%;
     color: #012001;
@@ -55,18 +65,22 @@
     
     flex-direction: row;
     border-width: 1px;
-    border-radius: 5px;
+    
     width:100%;
     display: flex;
     height:100%;
     font-size: 20px;
     justify-content: center;
     z-index:100;
+    
 }
 .searchBar input{
     flex:0.5;
-    height: 30px;
-    
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Raleway';
+    font-size: 20px;
 }
 
 .searchFilter button{
@@ -108,7 +122,8 @@
   
   
     width: 100%;
-    
+    max-width: 200px;
+    max-height: 180px;
     height:auto;
     display: block;
     object-fit: contain;
@@ -120,12 +135,17 @@
     display: flex;
     margin-top:auto;
     flex-direction: column;
+    gap: 1rem;
+    background-color: white;
+    width: 100%;
     
-    
+    padding-bottom: 5%;
 }
-.productDesc h4{
-    font-family: 'Raleway' sans-serif;
-    font-size: 15px;
+.productDesc h1{
+    font-family: 'Raleway' ;
+    font-size: 20px;
+    color: #012001;
+    background-color:white;
 }
 
 .productDesc p{
@@ -133,6 +153,7 @@
     font-family: 'Raleway' sans-serif;
     font-size: 15px;
     margin: auto;
+    color: #012001;
 }
 .productIndiv {
     display: flex;
@@ -146,7 +167,9 @@
     overflow: hidden;
     align-items: center;
     box-sizing: border-box;
-    
+   
+   border-radius: 5px;
+    padding: 0;
 }
 .products :hover{
     cursor:pointer
@@ -199,14 +222,15 @@
     border-radius: 10px;
     font-family: 'Raleway' sans-serif;
     font-weight: 500;
-    border: #012001 solid 5px;
+    border: #07644B solid 5px;
+    box-shadow:-10px 0px 20px black  ;
     z-index:9000
 }
 .listContainer.open{
     right: 0;
 }
 .listHeader{
-    background-color: #012001;
+    background-color: #07644B;
     color: #fefae0;
     font-size: 20px;
     height: 5%;
@@ -284,7 +308,7 @@
     margin: 0;
     padding: 0;
     line-height: 1;
-    color: #012001;
+    color: #07644B;
     font-size: 25px;
     
     
@@ -302,8 +326,8 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5); /* dark semi-transparent overlay */
-    backdrop-filter: blur(5px);     /* optional: adds blur effect */
+    background: rgba(0, 0, 0, 0.5); 
+    backdrop-filter: blur(5px);   
     z-index: 80;
 }
 .removeButton span{
@@ -321,7 +345,7 @@
 }
 
 .listInfo{
-    background-color: #012001;
+    background-color: #07644B;
     height: 20%;
     display: flex;
     flex-direction: column;
@@ -330,19 +354,7 @@
     border-top: 5px #fefae0 solid;
     
 }
-/*.listInfo button{
-    display: flex;
-    margin-right:20%;
-    background-color: #fefae0;
-    border: none;
-    border-radius: 10px;
-    height: 60px;
-    margin-top: 20px;
-    font-family: 'Raleway' sans-serif;
-    font-size: 19px;
-    
-}
-*/
+
 .totalPrice{
     display: flex;
     flex: 1;
@@ -368,7 +380,8 @@
     border:1px solid #012001;
     display: flex;
     justify-content: center;
-    flex: 3;
+    align-items: center;
+    flex: 2;
     font-family: 'Raleway' sans-serif;
     font-size: 15px;
     font-weight: 600;
@@ -396,7 +409,7 @@
     font-size: 20px;
     border: none;
     background: none;
-    color: #012001;
+    color: white;
     font-family: 'Raleway', sans-serif;
     
 }
@@ -442,13 +455,13 @@
     place-items: center;
 }
    .searchBar {
-    justify-content: center;   /* center the content horizontally */
-    width: 100%;               /* optional: make it full width */
+    justify-content: center; 
+    width: 100%;              
     padding: 0 10px;     
-    margin-left:0;      /* optional: add some side padding */
+    margin-left:0;      
   }
 
   .searchBar input {
-    width: 80%;                /* make input take most of the width */
+    width: 80%;               
   }
 }

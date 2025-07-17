@@ -250,21 +250,21 @@ position: fixed;
   font-size: 20px;
   border: none;
   background: none;
-  color: #fefae0;
+  color: white;
   font-family: 'Raleway', sans-serif;
     
 }
 
 .orderButton{
-    position: fixed;
-  top: 3.5%;
-  right: 5%;
-  z-index: 999;
-  font-size: 20px;
-  border: none;
-  background: none;
-  color: #fefae0;
-  font-family: 'Raleway', sans-serif;
+position: fixed;
+top: 3.5%;
+right: 5%;
+z-index: 999;
+font-size: 20px;
+border: none;
+background: none;
+color: white;
+font-family: 'Raleway', sans-serif;
     
 }
 .orderButton :hover{
@@ -284,3 +284,4 @@ position: fixed;
   font-family: 'Raleway', sans-serif;
     
 }
+

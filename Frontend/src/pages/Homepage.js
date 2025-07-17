@@ -29,7 +29,7 @@ const [isMenu,setIsMenu] = useState(false)
       <div className="headerContainer">
 
 
-        <MenuTitleChanger  text="eGrocer" className='whiteText'/>
+        <MenuTitleChanger  text="eGrocer" className='centerTitleText'/>
         
         
       </div>
@@ -89,7 +89,12 @@ Sustainability doesn’t stop at the farm — it goes all the way to your door.<
         
       </div>
       <div className="footerContainer">
-
+        <div className="footer">
+          <span>
+             Made by JoeDev55
+          </span>
+        </div>
+     
       </div>
     </div>
   );

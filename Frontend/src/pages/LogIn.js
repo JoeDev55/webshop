@@ -2,25 +2,29 @@
 
 import NavBar from '../NavBar';
 import { useNavigate } from "react-router";
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import MyProfile from "./MyProfile";
 import SideNav from './SideNav';
 import MenuButton from './MenuButton';
 import './Login.css';
 import Cart from "./Cart";
+import { UserContext } from './UserContext';
 function LogIn() {
     const navigate = useNavigate()
     const [isMenu,setIsMenu] = useState(false)
+    const { user, logIn, logout, token, loading } = useContext(UserContext);
     function toSignUp(){
         navigate('/signUp')
     }
-    const logInUser = async(e)=>{
+    
+      const logInUser = async(e)=>{
       e.preventDefault()
       const formData = new FormData(e.target)
       const credentials={
         email: formData.get('email'),
         password: formData.get('password')
       }
+      console.log(credentials)
       try{
         const response = await fetch('http://localhost:3000/login',
           {
@@ -36,8 +40,8 @@ function LogIn() {
           localStorage.setItem('token',data.token)
           console.log('Token saved:', localStorage.getItem('token'));
           console.log('login successful')
-        
-          localStorage.setItem('email', data.email);
+          logIn(user,data.token);  // update global state immediately!
+          
           navigate('/myProfile')
           
           
@@ -52,6 +56,9 @@ function LogIn() {
         console.error(err)
         }
     }
+   
+    
+    
   return (
     <div className="mainContainer">
           <header className="App-header">

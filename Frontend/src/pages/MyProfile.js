@@ -1,74 +1,58 @@
-import react, { useEffect, useState } from "react";
-import NavBar from '../NavBar';
+import { useContext, useEffect, useState } from "react";
+import NavBar from "../NavBar";
+import MenuButton from "./MenuButton";
+import SideNav from "./SideNav";
 import { useNavigate } from "react-router";
-import { useLocation } from "react-router";
-import './Myprofile.css';
+import "./Myprofile.css";
+import { UserContext } from "./UserContext";
+
 function MyProfile() {
-  const signedIn=false
-  const navigate = useNavigate()
-  function logIn(){
-    navigate('/logIn')
-  }
-  function signUp(){
-    navigate('/signUp')
-  }
-  function logOut(){
-    localStorage.removeItem('token')
-    localStorage.removeItem('email')
-    window.location.reload()
-  }
-  useEffect(()=>{ async function fetchUserData(){
-    const token = localStorage.getItem('token')
-    if (!token) {
-      console.log('no token found')
-      return navigate('/LogIn')
-    }
-    try {
-      const response = await fetch('http://localhost:3000/user/profile', {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+  const navigate = useNavigate();
+  const { user, logout, token, loading } = useContext(UserContext);
+  const [isMenu,setIsMenu] = useState(false)
+  // If no user, navigate to login
+  useEffect(()=>{
+      
+    if (!loading && user === null) {
+      console.log("No user, navigating...");
+      navigate("/logIn");
+}
+    console.log("User:", user);
+console.log("Loading:", loading);
+console.log("Token:", token);
+    
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch user');
-      }
-
-      const data = await response.json();
-      setUser(data);
-    } catch (error) {
-      console.error('Error fetching user:', error);
-      navigate('/logIn');
-    }
-  }
-  fetchUserData()
-  },[navigate])
-  const location = useLocation()
-  //const email = location.state?.email;
-  const [user,setUser] = useState()
-  const storedEmail = localStorage.getItem('email');
+ 
   
- return (
-    <div className="mainContainer">
-      <header className="App-header">
-        <NavBar/>
-      </header>
+  },[loading,logout, token,user,navigate])
+  
+   if (loading) return null;
 
-      <div className="profileContainer" >
+  if (!user) return null;
+  
+  
+
+
+  return (
+    <div className="mainContainer">
+      
+      <MenuButton onClick={()=>setIsMenu(prev => !prev)}   buttonText={isMenu ? "Close" : "Menu"} className={'menuButtonMyProfile'}/>
+      {isMenu && <SideNav  onClose={()=>setIsMenu(prev => !prev)}/>}
+
+ 
+        <MenuButton onClick={()=>{navigate('/products')}}  buttonText={'Order'} className={'orderButton'}/>
+      <div className="profileContainer">
         
         <div className="signInStatus">
-                Signed in as {user?.firstName}
-                hello 
-                <div>
-                  <button onClick={logOut}>log out</button>
-                </div>
-        </div>
+          Signed in as {user === null ? "nemár" : user.firstName}
+          <div>
+            <button onClick={logout}>Log out</button>
+          </div>
+        </div> 
+        
       </div>
     </div>
   );
-  }
-
- 
+}
 
 export default MyProfile;

@@ -11,7 +11,7 @@ function MenuButton({onClick,buttonText='',className, scrollEffect = false, clic
             setColor("#012001")
           }
           else{
-            setColor('#fefae0')
+            setColor('white')
             
           }
         };
@@ -24,7 +24,7 @@ function MenuButton({onClick,buttonText='',className, scrollEffect = false, clic
       if (clickEffect &&  scrollY < 1100){
          setIsClicked(prev=>!prev)
          setColor((prevColor)=>
-      isClicked ? '#fefae0' : "#012001"
+      isClicked ? 'white' : "#012001"
          )
       }
       if (onClick) {

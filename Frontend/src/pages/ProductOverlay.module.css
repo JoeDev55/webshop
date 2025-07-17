@@ -13,17 +13,17 @@
     height: 45%;
     color: #012001;
     border: 3px solid #012001;
-    border-radius: 3px;
+    border-radius: 5px;
     font-family: 'Raleway';
     pointer-events: auto;
     cursor:default;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     z-index: 100;
-    
+        background-color: white;
 }
 .imgContainer{
     display: flex;
-    
+
     
     margin: auto;
     padding-top: 10%;
@@ -42,8 +42,15 @@
     display: flex;
     flex-direction: row;
     margin-left: 10%;
-    padding-bottom: 2%;
+    margin: auto;
     flex: 1;
+}
+.name span{
+    display:flex;
+}
+#quantity{
+    font-size: 13px;
+    padding-top: 3%;
 }
 
 .price{
@@ -66,9 +73,9 @@
     flex-direction: row;
     border: #012001 2px solid ;
     border-radius: 20px;
-    height: 40%;
+    height: 50%;
     
-    background-color: #fefae0;
+    background-color: white;
     justify-content: center;
     align-items: center;
 }
@@ -92,7 +99,7 @@
 .amountButton button{
     height: 25px;
     width: 25px;
-    background-color: #fefae0;
+    background-color: white;
     border: none;
     border-radius: 50%;
     display: flex;
@@ -120,7 +127,7 @@
     height: 100%;
     border: 2px solid #012001;
     color: #012001e0;
-    background-color: #fefae0;
+    background-color: white;
     border-radius: 50px;
     font-family: 'Raleway';
     font-size: 20px;
@@ -144,8 +151,12 @@
     max-width:200px ;
     
 }
+.name{
+    gap: 3rem;
+}
 .name span{
     font-size: 30px;
+    
 }
 .closeButton{
    position: absolute;
@@ -154,8 +165,17 @@
    
     
     border: none;
-    background-color: #fefae0;
+    background-color: white;
     color: #012001;
     font-size: x-large;
     font-weight: 600;
+}
+.favouriteButton{
+    border: none;
+    background-color: #fefae0;
+
+}
+.favouriteButton span{
+    
+    color: #012001;
 }

@@ -1,26 +1,32 @@
 
-import {useState } from "react";
+import {useState, useContext } from "react";
 import { useEffect } from "react";
 import MenuButton from "./MenuButton";
 import SideNav from "./SideNav";
 import { useNavigate } from "react-router";
 import './Products.css';
 import upArrow from '../media/up-arrow.png';
+import leaf from '../media/leaf.png';
 import Cart from "./Cart";
 import ProductOverlay from "./ProductOverlay";
+import { UserContext } from "./UserContext";
+
 function Products() {
+  const{totalPrice,setTotalPrice,shoppingList,setShoppingList} = useContext(UserContext)
   const navigate = useNavigate()
   const [products, setProducts] = useState([])
-  const [shoppingList,setShoppingList] = useState([])
+  
   const [category,setCategory]= useState("all")
   const [searchQuery,setSearchQuery] = useState('')
   const [favList,setFavList]=useState([])
-  const [totalPrice,setTotalPrice] = useState(0)
+  
   const [listVisible,setListVisible] = useState(false)
   const [filtersVisible,setFiltersVisible] = useState(false)
   //const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
   const [searchResults, setSearchResults] = useState([]);
   const [moveCart,setMoveCart] = useState()
+  
+  
   useEffect(() => {
     
     const endpoints ={
@@ -42,37 +48,26 @@ function Products() {
   }, [category]);
 
  useEffect(() => {
-  console.log("Shopping list updated:", shoppingList);
-}, [shoppingList]);
-
+  localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
   
- function Add_one(){
-
- }
- function Remove_one(){
-
- }
- 
+}, [shoppingList]);
+ const toggleCart = () => {
+    setMoveCart(prev=> !prev)
+}
   function Add(item, amount){
-    
-    /*const added = shoppingList.find(i=> i.product?._id === item._id)
-    if (added) {
-      //console.log(item._id)
-      //console.log(item.name)
-      const updated = shoppingList.map(i=> i.product?._id === item._id
-      ? {...item, quantity: i.quantity + 1}
-      :i)
-      setShoppingList(updated)
-    }
-    else {
-			setShoppingList([...shoppingList, {product: item, quantity: 1}]);
-		}
-    */
-   
-   
    const exists = shoppingList.find(i=> i.id === item.id)
+   
    if (exists) {
-    const updatedList = shoppingList.map(i =>
+    if ( exists.quantity > 35 || exists.quantity + amount > 35) {
+      setShowOverlay(false)
+      const maxQtyList = shoppingList.map(i =>
+      i.id === item.id
+        ? { ...i, quantity: (35)}
+        : i)
+        setShoppingList(maxQtyList)
+      }
+    else{
+      const updatedList = shoppingList.map(i =>
       i.id === item.id
         ? { ...i, quantity: (i.quantity || 1) + amount }
         : i
@@ -81,8 +76,11 @@ function Products() {
     setShoppingList(updatedList);
     console.log(item.quantity)
     setTotalPrice(totalPrice + amount * item.price)
+    }
+    
    }
-   else {
+   
+   else{
     
     setShoppingList([...shoppingList,{...item,quantity: amount}]);
     console.log(item.quantity)
@@ -93,11 +91,14 @@ function Products() {
    
   }
   function Remove(item){
+    if (shoppingList.length === 1 && item.quantity === 1) {
+       toggleCart()
+    }
     if (item.quantity <=0 || item.quantity === 1) {
       const removeItem = shoppingList.filter(i=> i.id !== item.id)
       setShoppingList(removeItem)
       console.log(item.quantity)
-      if (totalPrice != 0) {
+      if (totalPrice !== 0) {
         setTotalPrice(totalPrice-item.price)
       }
       
@@ -118,11 +119,11 @@ function Products() {
     //console.log(shoppingList)
   }
   
-  function RemoveItem(item){
+  function RemoveItem(item,amount){
     const removeItem = shoppingList.filter(i=> i.id !== item.id)
       setShoppingList(removeItem)
       console.log(item.quantity)
-      setTotalPrice(totalPrice-item.price)
+      setTotalPrice(totalPrice-item.price * amount)
   }
 /*
   useEffect(() => {
@@ -184,10 +185,7 @@ useEffect(() => {
     });
   };
 
-const toggleCart = () => {
-    setMoveCart(prev=> !prev)
-    
-}
+
 const [showOverlay,setShowOverlay] = useState(false)
 const [selectedItem,setSelectedItem] = useState(null)
 
@@ -205,7 +203,11 @@ const [selectedItem,setSelectedItem] = useState(null)
       {isMenu && <SideNav  onClose={()=>setIsMenu(prev => !prev)}/>}
       </div>
       <div className="pageTitle">
+        <button onClick={()=>navigate('/')}>
+          <img src={leaf}/>
         <span>eGrocer</span>
+        
+        </button>
         <div className="searchBar">
           <input type="text" placeholder="Search" value={searchQuery} onChange={(e)=> setSearchQuery(e.target.value)}></input>
         </div>
@@ -258,8 +260,8 @@ const [selectedItem,setSelectedItem] = useState(null)
               <img  src={`http://localhost:3000/${item.img}`} alt={item.name}  />  
             </div>
           <div className="productDesc">
-            <h4>{item.name}</h4>
-            <p>{item.price} Ft</p>
+            <h1>{item.name}</h1>
+            <p>{item.price}/{item.quantityType}</p>
           </div>
           </button>
             ))}
@@ -270,7 +272,7 @@ const [selectedItem,setSelectedItem] = useState(null)
       className="overlayBackdrop" 
       onClick={() => setShowOverlay(false)}
     />
-    <ProductOverlay  item={selectedItem} onClose={()=>setShowOverlay(false)} onClick={(amount)=>{Add(selectedItem,amount);setMoveCart("0px"); setShowOverlay(false) }}/>
+    <ProductOverlay  item={selectedItem} onClose={()=>setShowOverlay(false)} onClick={(amount)=>{Add(selectedItem,amount); setShowOverlay(false) }}/>
       </>)}
       <Cart
       shoppingList={shoppingList}

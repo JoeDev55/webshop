@@ -1,12 +1,15 @@
+require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const cors = require('cors');
 const app = express();
 const port = 3000;
 
 const JWT_SECRET = process.env.JWT_SECRET || 'asd';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 app.use(cors());
 app.use(express.json());

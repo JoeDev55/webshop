@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useContext } from "react"
 import { useNavigate } from "react-router"
-function Cart({ shoppingList = [], totalPrice, Add, Remove, RemoveItem, toggleCart, moveCart }){
+import { UserContext } from "./UserContext"
+function Cart({ shoppingList = [], Add, Remove, RemoveItem, toggleCart, moveCart }){
  const navigate = useNavigate()
+ const {totalPrice} = useContext(UserContext) 
 
-  
 return(
 <div>
     <button onClick={toggleCart} style={{
@@ -11,7 +12,7 @@ return(
         top: '3.5%',
         right: '3%',
         border:'none',
-        color:'#1012001' ,
+        color:'white' ,
         backgroundColor:'transparent',
         fontSize:'large',
         fontFamily: 'Raleway',
@@ -19,7 +20,7 @@ return(
         cursor:'pointer',
         zIndex:'999'
     }}>
-        <span style={{zIndex:'1000'}}>Cart</span>
+        <span style={{zIndex:'1000'}}>{shoppingList.length === 0 ? "Cart":"Cart("+shoppingList.length+")"}</span>
     </button>
     <div className="listContainer" style={{
         position:'fixed',
@@ -36,7 +37,7 @@ return(
             justifyContent:'right',
             border:'none',
             color: '#fefae0',
-            backgroundColor:'#012001' ,
+            backgroundColor:'#07644B' ,
             fontSize:'large',
             fontFamily: 'Raleway',
             display:'flex',
@@ -48,6 +49,7 @@ return(
             <span>Close</span>
           </button>
         </div>
+        {shoppingList.length === 0 ? <div className="list" style={{margin:'auto', overflowY:'hidden',marginTop:'50%'}}>Your list is empty</div> : 
         <ul className="list">
           
           {shoppingList.map(item=>(
@@ -61,7 +63,7 @@ return(
             </div>
 
             <div className="itemPrice">
-              <span>{item.price*item.quantity}Ft</span>
+              <span>{item.price*item.quantity} Ft</span>
             </div>
 
             </div>
@@ -77,7 +79,7 @@ return(
             <span id={item.id}>{item.quantity}</span>
 
             <div className="amountButton">
-            <button key={item.id} onClick={() => Add(item,1)}>
+            <button key={item.id} disabled={item.quantity>=35} onClick={() => {Add(item,1)}}>
               <span>+</span>
             </button>
             </div>
@@ -85,7 +87,7 @@ return(
             
             </div>
             <div className="removeButton">
-              <button key={item.id} onClick={()=>{RemoveItem(item,1)}}>
+              <button key={item.id} onClick={()=>{RemoveItem(item,item.quantity)}}>
                 <span>✕</span>
               </button>
             
@@ -99,7 +101,7 @@ return(
             
           }
         </ul>
-        
+        }
         <div className="listInfo">
           <div className="totalPrice">
             <p>Subtotal:</p>
@@ -108,7 +110,7 @@ return(
           </div>
           <div className="listButtons">
           
-          <button id="checkoutButton" onClick={()=>{navigate('/checkout', {state: {shoppingList, totalPrice}})}}>
+          <button id="checkoutButton" disabled={shoppingList.length === 0} onClick={()=>{navigate('/checkout', {state: {shoppingList, totalPrice}})}}>
             <p>Checkout</p>
           </button>
           </div>
