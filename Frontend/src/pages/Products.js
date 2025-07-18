@@ -40,7 +40,7 @@ function Products() {
     const endpoint = endpoints[category] || endpoints.all;
 
 
-    fetch(endpoint)  // your backend endpoint
+    fetch(endpoint)  
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(err => console.error('Error fetching products:', err));
@@ -75,6 +75,7 @@ function Products() {
     );
     setShoppingList(updatedList);
     console.log(item.quantity)
+    console.log('item type',item.quantityType)
     setTotalPrice(totalPrice + amount * item.price)
     }
     
@@ -116,7 +117,7 @@ function Products() {
     console.log(item.quantity)
     setTotalPrice(totalPrice-item.price)
     }
-    //console.log(shoppingList)
+
   }
   
   function RemoveItem(item,amount){
@@ -125,21 +126,11 @@ function Products() {
       console.log(item.quantity)
       setTotalPrice(totalPrice-item.price * amount)
   }
-/*
-  useEffect(() => {
-  const handler = setTimeout(() => {
-    setDebouncedSearchQuery(searchQuery);
-  }, 300); // 300ms delay
 
-  return () => {
-    clearTimeout(handler);
-  };
-}, [searchQuery]);
-*/
   useEffect(() => {
 
     if (searchQuery.trim() === "") {
-      setSearchResults([]); // Clear search results
+      setSearchResults([]); 
       return;
     }
 
@@ -199,7 +190,7 @@ const [selectedItem,setSelectedItem] = useState(null)
       </header>
       
       <div className="nav">
-        <MenuButton onClick={()=>setIsMenu(prev => !prev)} buttonText={isMenu ? "Close" : "Menu"} className={'menuButtonProducts'}/>
+        <MenuButton onClick={()=>setIsMenu(prev => !prev)} clickEffect={true} buttonText={isMenu ? "✕" : "Menu"} className={'menuButtonProducts'}/>
       {isMenu && <SideNav  onClose={()=>setIsMenu(prev => !prev)}/>}
       </div>
       <div className="pageTitle">
@@ -261,7 +252,7 @@ const [selectedItem,setSelectedItem] = useState(null)
             </div>
           <div className="productDesc">
             <h1>{item.name}</h1>
-            <p>{item.price}/{item.quantityType}</p>
+            <p>{item.price} Ft/{item.quantityType}</p>
           </div>
           </button>
             ))}
@@ -280,7 +271,7 @@ const [selectedItem,setSelectedItem] = useState(null)
       Add={Add}
       Remove={Remove}
       RemoveItem={RemoveItem}
-      toggleCart={toggleCart} // or create a new toggle if needed
+      toggleCart={toggleCart} 
       moveCart={moveCart ? "0px" : "-900px"}
       />
         </div>
@@ -295,84 +286,7 @@ const [selectedItem,setSelectedItem] = useState(null)
         </button>
       )}
       
-      {/*
-      <button className="cartButton" onClick={() => setListVisible(!listVisible)}>
-      {listVisible ? "Close" : "Cart"}
-      </button>
-      {listVisible && (
-      <div className={`listContainer ${listVisible ? "open" : ""}`}>
-        <div className="listHeader">
-          <span>Your list:</span>
-        </div>
-        <ul className="list">
-          
-          {shoppingList.map(item=>(
-            
-          <li key={item.id}>
-            
-            <div key={item.name} className="namePrice">
-
-            <div className="listItemName">
-              <p>  {item.name}</p>
-            </div>
-
-            <div className="itemPrice">
-              <span>{item.price*item.quantity}Ft</span>
-            </div>
-
-            </div>
-            <div className="amountRemove">
-            <div className="amountBox">
-
-            <div className="amountButton">
-            <button  key={item.name} onClick={() => Remove(item)}>
-              <span>-</span>
-            </button>
-            </div>
-
-            <span id={item.id}>{item.quantity}</span>
-
-            <div className="amountButton">
-            <button key={item.id} onClick={() => Add(item)}>
-              <span>+</span>
-            </button>
-            </div>
-
-            
-            </div>
-            <div className="removeButton">
-              <button key={item.id} onClick={()=>{RemoveItem(item)}}>
-                <span>✕</span>
-              </button>
-            
-            </div>
-            </div>
-            
-          </li>
-          
-          
-          )) 
-            
-          }
-        </ul>
-        
-        <div className="listInfo">
-          <div className="totalPrice">
-            <p>Subtotal:</p>
-            <p>{totalPrice} Ft</p>
-            
-          </div>
-          <div className="listButtons">
-          
-          <button id="checkoutButton" onClick={()=>{navigate('/checkout', {state: {shoppingList, totalPrice}})}}>
-            <p>Checkout</p>
-          </button>
-          </div>
-        </div>
-        
-      </div>
-      )}
-      */}
+     
       </div>
     </div>
   );

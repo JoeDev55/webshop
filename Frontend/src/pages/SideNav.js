@@ -15,11 +15,7 @@ function SideNav({onClick}){
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/products">Products</a></li>
-        {/* 
-        {!user ? <li><a href="/login">Login</a></li> : <li><a href="/myProfile">My profile</a></li>}
-        
-        <li><a href="/signup">Sign up</a></li>
-        */}
+       
       </ul>
     </div>
     

@@ -33,10 +33,10 @@ return(
             </div>
         </div>
         <div className={styles.descContainer}>
-            <div className={styles.name}>
-                <span>{item.name}</span>
+           
+                <span id={styles.itemName}>{item.name}</span>
                 <span id={styles.quantity}>{item.price}Ft/{item.quantityType}</span>
-            </div>
+            
             
             <div className={styles.amountContainer}>
             

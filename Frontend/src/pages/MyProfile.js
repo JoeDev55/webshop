@@ -10,9 +10,7 @@ function MyProfile() {
   const navigate = useNavigate();
   const { user, logout, token, loading } = useContext(UserContext);
   const [isMenu,setIsMenu] = useState(false)
-  // If no user, navigate to login
   useEffect(()=>{
-      
     if (!loading && user === null) {
       console.log("No user, navigating...");
       navigate("/logIn");

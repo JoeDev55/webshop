@@ -67,11 +67,12 @@ return(
               <img className={styles.img} src={approved}/>
             </div>
             <div className={styles.order}>
-              Your order was succesful
+              Your order was successful
             </div>
-            <div className={styles.email}>
+            {/*<div className={styles.email}>
               We sent an order confirmation e-mail to your address
             </div>
+            */}
        </div>
 
        <div className={styles.buttonContainer}>

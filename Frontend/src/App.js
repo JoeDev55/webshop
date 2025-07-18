@@ -12,6 +12,7 @@ import Success from './pages/Success.js';
 import Cancel from './pages/Cancel.js';
 import { useEffect, useState } from 'react';
 import { UserProvider } from './pages/UserContext.js';
+
 function App() {
 
 const [shoppingList, setShoppingList] = useState([]);

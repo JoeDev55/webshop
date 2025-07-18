@@ -1,11 +1,6 @@
-/*   HOMEPAGE STYLES*/
-
-
 .mainContainer{
-    
     background-color: #fefae0;
 }
-
 .headerContainer{
     background-image: url(../media/storebg.jpg);
     background-size: cover;
@@ -19,11 +14,7 @@
     justify-content: center;
     display: flex;
     flex-direction: column;
-   
-    
     display: flex;
-    
-    
 }
 .gridContainer{
     display: flex;
@@ -34,10 +25,8 @@
 .grid{
     display: flex;
     flex-direction: row;
-    align-items: center;       /* vertically align image + text */
-    gap: 2rem;                 /* space between image and text */
-    
-    
+    align-items: center;       
+    gap: 2rem;                 
 }
 .grid img{
     width:50%;
@@ -54,17 +43,14 @@
     font-size: xx-large;
     letter-spacing: 0.7px;
 }
-
 .homeImg4 img{
     width:100%;
     height:100%;
-   
 }
 .titleText p{
     justify-content: center;
     display: flex;
     font-size: 30px;
-    
 }
 .centerTitleText{
     text-decoration: none;
@@ -74,8 +60,6 @@
     padding-right: 100%;
     margin-top: 4px;
     padding-top:40px;
-    
-    
 }
 .menuText{
     text-decoration: none;
@@ -86,7 +70,6 @@
     top:3%;
     border: none;
     background: none;
-    
 }
 .sideNavbar {
   position: fixed;
@@ -98,7 +81,6 @@
   color: #012001;
   z-index: 991;
   padding: 20px;
- 
 }
 .sideNavbar ul{
     margin-top: 50px;
@@ -115,20 +97,15 @@
     font-weight: 500;
 }
 .sideNavbar a:hover{
-    /*background-color: #012001;
-    color:#fefae0 ;*/
     text-decoration: underline;
 }
-
-
 .scrollingContainer{
     width: 100%;
     display: flex;
     overflow: hidden;
     margin-top:50px;
-   
     z-index: 900;
-    background-color: #012001; /* optional */
+    background-color: #012001;
 }
 .scrollText{
     display: inline-block;
@@ -163,15 +140,12 @@
     padding-right:10% ;
     height: 300px;
 }
-
 .shopQuick button{
     display: flex;
     justify-content: center;
     background-color: rgb(16, 90, 16);
     border-radius: 20px;
     height:50px;
-    
-    
 }
 .shopQuick button span{
     display: flex;
@@ -179,18 +153,15 @@
     color: #fefae0;
     font-size: large;
     font-family:Arial, Helvetica, sans-serif ;
-    
 }
 .shopQuick span{
     display: flex;
     justify-content: center;
     color: #fefae0;
-    
 }
 .signUp{
     height: 200px;
 }
-
 .footerContainer{
     height: 110px;
     background-color: #012001;

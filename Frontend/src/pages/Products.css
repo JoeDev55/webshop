@@ -39,19 +39,16 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    
 }
 .searchBarContainer button{
     background-color:white;
-    border: 2px solid #012001;
+    border: none;
     border-radius: 10px;
     width:30%;
     color: #012001;
     font-family: 'Raleway' sans-serif;
     display: flex;
     font-size: 18px;
-    
-    
 }
 .searchFilter  :hover{
     cursor: pointer;
@@ -59,20 +56,16 @@
 .searchFilter :hover{
     background-color: #012001;
     color: #fefae0;
-    
 }
 .searchBar{
-    
     flex-direction: row;
     border-width: 1px;
-    
     width:100%;
     display: flex;
     height:100%;
     font-size: 20px;
     justify-content: center;
     z-index:100;
-    
 }
 .searchBar input{
     flex:0.5;
@@ -86,7 +79,6 @@
 .searchFilter button{
     margin-top: 5px;
     margin-bottom: 5px;
-    
 }
 
 .productsContainer{
@@ -98,7 +90,6 @@
     display: flex;
     width:80%;
     z-index: 50;
-    
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -110,7 +101,6 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
     gap: 1rem;
     justify-content: center;
-    
 }
 .productImg{
     height: auto;
@@ -118,9 +108,6 @@
     max-width:200px ;
 }
 .productImg img{
-         
-  
-  
     width: 100%;
     max-width: 200px;
     max-height: 180px;
@@ -128,7 +115,6 @@
     display: block;
     object-fit: contain;
     box-sizing: border-box;
-    
 }
 
 .productDesc{
@@ -138,19 +124,18 @@
     gap: 1rem;
     background-color: white;
     width: 100%;
-    
     padding-bottom: 5%;
 }
 .productDesc h1{
     font-family: 'Raleway' ;
+    font-weight: bold;
     font-size: 20px;
     color: #012001;
     background-color:white;
 }
-
 .productDesc p{
     display: flex;
-    font-family: 'Raleway' sans-serif;
+    font-family: 'Raleway';
     font-size: 15px;
     margin: auto;
     color: #012001;
@@ -167,8 +152,7 @@
     overflow: hidden;
     align-items: center;
     box-sizing: border-box;
-   
-   border-radius: 5px;
+    border-radius: 5px;
     padding: 0;
 }
 .products :hover{
@@ -179,8 +163,7 @@
     position: fixed;
     bottom:5%;
     left:65%;
-    background-color: #fefae0;
-    
+    background-color: white;
     height: 50px;
     width: 50px;
     border-style: none;
@@ -206,9 +189,7 @@
 .cartButton :hover{
     cursor: pointer;
 }
-
 .listContainer{
-    
     width:20%;
     height:100%;
     transition: right 0.5s ease-in-out;
@@ -258,13 +239,10 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    
 }
 .listItemName{
     display: flex;
     flex: 4;
-    
-    
 }
 .itemPrice{
     display: flex;
@@ -281,7 +259,6 @@
 }
 .amountButton{ 
     display: flex;
-    
     align-content: center;
 }
 .amountButton :hover{
@@ -308,14 +285,11 @@
     margin: 0;
     padding: 0;
     line-height: 1;
-    color: #07644B;
+    color: #012001;
     font-size: 25px;
-    
-    
 }
 .removeButton{
     display: flex;
-    
 }
 .removeButton :hover{
     cursor: pointer
@@ -341,9 +315,7 @@
     display: flex;
     flex-direction: row;
     height: 40%;
-   
 }
-
 .listInfo{
     background-color: #07644B;
     height: 20%;
@@ -352,9 +324,7 @@
     padding-left: 3%;
     padding-right: 3%;
     border-top: 5px #fefae0 solid;
-    
 }
-
 .totalPrice{
     display: flex;
     flex: 1;
@@ -373,7 +343,6 @@
     flex-direction: row;
     padding-top: 1%;
     padding-bottom: 1%;
-    
 }
 #checkoutButton{
     border: none;
@@ -411,9 +380,7 @@
     background: none;
     color: white;
     font-family: 'Raleway', sans-serif;
-    
 }
-
 }
 @media (max-width: 400px) {
     .pageTitle{
@@ -460,7 +427,6 @@
     padding: 0 10px;     
     margin-left:0;      
   }
-
   .searchBar input {
     width: 80%;               
   }

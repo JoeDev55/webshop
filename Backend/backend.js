@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const express = require('express');
 const mysql = require('mysql');
 const bcrypt = require('bcrypt');
@@ -8,14 +9,14 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
-const JWT_SECRET = process.env.JWT_SECRET || 'asd';
+
 const JWT_SECRET = process.env.JWT_SECRET;
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static('media'));
 
-// MySQL connection
+
 
     const db = mysql.createConnection({
   host: 'localhost',
@@ -32,7 +33,7 @@ db.connect(err => {
   console.log('Connected to MySQL');
 });
 
-// Get all products
+
 app.get('/productList', (req, res) => {
   db.query('SELECT * FROM products', (err, results) => {
     if (err) return res.status(500).json({ message: 'DB error' });
@@ -71,16 +72,7 @@ app.get('/specialtyList', (req, res) => {
 });
 
 
-// Get products by category
-/*app.get('/:categoryList', (req, res) => {
-  const category = req.params.categoryList.replace('List', '');
-  db.query('SELECT * FROM products WHERE category = ?', [category], (err, results) => {
-    if (err) return res.status(500).json({ message: 'DB error' });
-    res.json(results);
-  });
-});
-*/
-// Filtered products
+
 app.get('/filteredProducts', (req, res) => {
     
     const q = req.query.q || '';
@@ -98,7 +90,7 @@ app.get('/filteredProducts', (req, res) => {
 
 })
 
-// Signup
+
 app.post('/signup', (req, res) => {
     console.log("received signup data: ",req.body)
   const {NULL, email, password, firstName, lastName, phoneNumber, birthDate } = req.body;
@@ -127,7 +119,7 @@ app.post('/signup', (req, res) => {
 });
 
 app.post('/favouriteItem', (req,res)=>{
-    console.log("req.body:", req.body); // Debug print
+    console.log("req.body:", req.body); 
   db.query('INSERT INTO favourites VALUES (NULL, ?, ?)',[req.body.user_id, req.body.product_id] ),
   (err, rows, fields) => {
   if (err) {
@@ -141,7 +133,7 @@ app.post('/favouriteItem', (req,res)=>{
 }})
 
 app.delete('/favouriteItemDel', (req,res)=>{
-    console.log("req.body:", req.body); // Debug print
+    console.log("req.body:", req.body); 
   db.query('DELETE * FROM favourites WHERE user_id = ? AND product_id = ?',[req.body.user_id, req.body.product_id] ),
   (err, rows, fields) => {
   if (err) {
@@ -153,7 +145,7 @@ app.delete('/favouriteItemDel', (req,res)=>{
     return res.status(200).json({message:"item deleted from favourites"})
   }
 }})
-// Login
+
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
   db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
@@ -170,12 +162,11 @@ app.post('/login', (req, res) => {
 
     const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: '1h' });
     res.status(201).json({ message: 'login successful', token, email });
-    const token = jwt.sign({ email: user.email}, JWT_SECRET, { expiresIn: '1h' });
-    res.status(201).json({ message: 'login successful', token, email: user.email });
+    
   });
 });
 
-// Get user profile
+
 app.get('/user/profile', (req, res) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -185,16 +176,13 @@ app.get('/user/profile', (req, res) => {
   const token = authHeader.split(' ')[1];
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    db.query('SELECT id, email, firstName, lastName, phoneNumber, age FROM users WHERE email = ?', [decoded.email], (err, results) => {
-      if (err) return res.status(500).json({ message: 'DB error' });
-    console.log("Decoded email",decoded.email)
     db.query('SELECT id, email, firstName, lastName, phoneNumber, birthDate FROM users WHERE email = ?', [decoded.email], (err, results) => {
       if (err) {console.log("db error",err);return res.status(500).json({ message: 'DB error' })};
       if (results.length === 0) return res.status(404).json({ message: 'User not found' });
       res.json(results[0]);
     });
   } catch (err) {
-    return res.status(401).json({ message: 'Invalid or expired token' });
+    res.status(401).json({ message: 'Invalid or expired token' }); 
   }
 });
 

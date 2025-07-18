@@ -2,10 +2,8 @@
 .mainContainerCheckout{
     background-color: #fefae0;
     min-height: 1000px;
-    padding-top: 10%;
     display: flex;
     flex-direction: row;
-    
 }  
 .centerDiv{
     display: flex;
@@ -15,42 +13,58 @@
     gap: 5rem;
 }
 .menuButtonCheckout{
-position: fixed;
-  top: 3.5%;
-  left: 5%;
-  z-index: 999;
-  font-size: 20px;
-  border: none;
-  background: none;
-  color: #012001;
-  font-family: 'Raleway', sans-serif;
-    
+    position: fixed;
+    top: 3.5%;
+    left: 5%;
+    z-index: 999;
+    font-size: 20px;
+    border: none;
+    background: none;
+    color: #012001;
+    font-family: 'Raleway', sans-serif;
 }
 .checkoutItems{
     display: flex;
-    height: 500px;
+    height: fit-content;
     width: 100%;
-   
-   
+    box-shadow: 0px 10px 30px #012001;
     border: #012001 solid 2px;
-    overflow: scroll;
-    overflow-x: hidden;
-    
-    
-    background-color: #fefae0;
-    
+    border-radius: 2px;
+    background-color: white;
+        
     
     
     
 }
-
+.pageTitle {
+    z-index: 100;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    margin-bottom: 0%;
+    background-color: #fefae0;
+}
+.pageTitle button{
+    border: none;
+    background-color: transparent;
+    font-size: xx-large;
+    font-family: 'Raleway';
+    color: black;
+}
+.pageTitle :hover{
+    cursor: pointer;
+}
 .checkoutItems li{
     list-style: none;
     font-family: 'Raleway', sans-serif;
     font-size: large;
     display: flex;
     flex-direction: row;
-    
+    padding-bottom: 2%;
+}
+.checkoutItems img {
+    border: 2px solid #012001;
+    border-radius:5px ;
 }
 .checkoutItems li div{
     display: flex;
@@ -61,61 +75,47 @@ position: fixed;
     gap: 5rem;
     }
 .checkoutItems p :hover{
-        background-color: #012001;
-        color: #fefae0;
+    background-color: #012001;
+    color: #fefae0;
     }
 .totalPrice2{
     display: flex;
     flex-direction: column;
-    height: 140px;
+    height: 100px;
     width: 100%;
-    
     background-color: #012001;
     border: #012001 solid 2px;
+    border-radius: 10px;
     border-top: none;
     justify-content: center;
-    font-family: 'Raleway', sans-serif;
-    
-    
-   
+    font-family: 'Raleway';
+    margin-top: 1%;
+    margin-bottom: 4%;
 }
 .totalPrice2 span{
-        
-        display: flex;
-        margin-left: 20px;
-        margin-top: 15px;
-        font-size: xx-large;
-        color: #fefae0;
+    display: flex;
+    margin-left: 20px;
+    margin-top: 15px;
+    font-size: 20px;
+    color: #fefae0;
 }
 .totalPrice2 p{
-        display: flex;
-        margin-left: 20px;
-        margin-top: 15px;
-        font-size: medium;
-        color: #fefae0;
+    display: flex;
+    margin-left: 20px;
+    margin-top: 15px;
+    font-size: 15px;
+    color: #fefae0;
 }
-
 .itemInfo{
-    
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    
 }
 .shippingInfo{
-    
     display: flex;
     flex-direction: column;
-    
-    
-    
-    
     justify-content: center;
-    
-    
-    
-    
 }
 .shippingInfo input{
     width: 100%;
@@ -124,16 +124,32 @@ position: fixed;
     border: solid gray 1px ;
     border-radius: 10px;
     margin-bottom: 10px;
-    }
+}
 .namesCityZ{
-        display: flex;
-        gap: 10px;
-        
+    display: flex;
+    gap: 10px;  
 }
 .namesCityZ input{
-            flex: 1;
+    flex: 1;
+}
+.inputText span{
+    color: gray;
+    font-size: 13px;
+}
+.inputText{
+    padding-bottom: 2%;
 }
 .submitButton{
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #012001;
+    background-color: #fefae0;
+    color: #012001;
+    font-family: 'Raleway';
+    font-size: 20px;
+    cursor: pointer;
+}
+.submitButton:hover{
     border: 1px solid #012001;
     border-radius: 10px;
     background-color: #012001;
@@ -141,14 +157,4 @@ position: fixed;
     font-family: 'Raleway';
     font-size: 20px;
     height: 40px;
-
-}
-.submitButton:hover{
-    
-    border-radius: 10px;
-    background-color: #fefae0;
-    color: #012001;
-    font-family: 'Raleway';
-    font-size: 20px;
-    cursor: pointer;
 }

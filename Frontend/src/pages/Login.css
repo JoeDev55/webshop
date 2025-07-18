@@ -1,10 +1,8 @@
-/*LOG IN PAGE STYLES*/
 .logInContainer{
-    
     margin-left: 20%;
     margin-right: 20%;
     display: flex;
-    justify-content: center;   /* centers horizontally */
+    justify-content: center;  
     align-items: center;  
     background-size: cover;
     background-position: center;
@@ -13,21 +11,15 @@
 }
 .logInContainer form input{
     display: block;
-    
 }
-
 input.email{
     color: white;
     background-color: #32746D;
-    
 }
 input.password{
     color: white;
     background-color: #32746D;
 }
-
-
-
 .logInCard{
     background-color: #012001;
     width:40%;

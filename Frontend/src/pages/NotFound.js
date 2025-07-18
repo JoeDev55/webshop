@@ -1,8 +1,5 @@
 import react from "react";
 import { Link } from "react-router";
-
-
-
 function NotFound() {
   return (
     <div>

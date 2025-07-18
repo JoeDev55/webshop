@@ -1,5 +1,4 @@
 import { useState,useEffect } from "react";
-
 function MenuButton({onClick,buttonText='',className, scrollEffect = false, clickEffect = false}){
     const [color,setColor]=useState()
     const [isClicked,setIsClicked] = useState(false)
@@ -12,10 +11,8 @@ function MenuButton({onClick,buttonText='',className, scrollEffect = false, clic
           }
           else{
             setColor('white')
-            
           }
         };
-    
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
       }, []);
@@ -30,9 +27,7 @@ function MenuButton({onClick,buttonText='',className, scrollEffect = false, clic
       if (onClick) {
         onClick(e)
       }
-     
     }
-      
 return(
     <button style={{color}} className={className} onClick={handleClick}>
         {buttonText}
