@@ -39,7 +39,7 @@ Built with:
 ### Product inspect
 ![Products inspect](/screenshots/product_view.PNG)
 ### Cart
-![Cart](/screenshots/screenshots/cart_open.PNG)
+![Cart](/screenshots/cart_open.PNG)
 ### Checkout
 ![Checkout](/screenshots/checkout_page.PNG)
 ### Payment
