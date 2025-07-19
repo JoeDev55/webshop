@@ -52,4 +52,8 @@ Built with:
 - Admin dashboard for managing products & orders
 - Email notifications and updates about orders
 
-
+## Author & Contact Info
+**József Gál**
+Github: [JoeDev55](https://github.com/JoeDev55)
+LinkedIn: [Gál József](www.linkedin.com/in/józsef-gál-a61653365)
+Email : jozsefgal0509@gmail.com
