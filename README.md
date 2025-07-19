@@ -33,17 +33,17 @@ Built with:
 ## Screenshots
 
 ### Home
-![Home](screenshots/homepage.png)
+![Home](/screenshots/homepage.PNG)
 ### Products
-![Products](screenshots/homepage.png)
+![Products](/screenshots/products_page.PNG)
 ### Product inspect
-![Products inspect](screenshots/homepage.png)
+![Products inspect](/screenshots/product_view.PNG)
 ### Cart
-![Cart](screenshots/homepage.png)
+![Cart](/screenshots/screenshots/cart_open.PNG)
 ### Checkout
-![Checkout](screenshots/homepage.png)
+![Checkout](/screenshots/checkout_page.PNG)
 ### Payment
-![Payment](screenshots/homepage.png)
+![Payment](/screenshots/stripe_payment.PNG)
 
 
 ## Planned features
@@ -51,3 +51,5 @@ Built with:
 - User profile page with order history & favourites
 - Admin dashboard for managing products & orders
 - Email notifications and updates about orders
+
+
