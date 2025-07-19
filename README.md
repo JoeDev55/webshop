@@ -55,5 +55,5 @@ Built with:
 ## Author & Contact Info
 **József Gál**
 - Github: [JoeDev55](https://github.com/JoeDev55)
-- LinkedIn: [Gál József](www.linkedin.com/in/józsef-gál-a61653365)
+- LinkedIn: [Gál József](https://www.linkedin.com/in/j%C3%B3zsef-g%C3%A1l-a61653365/)
 - Email : jozsefgal0509@gmail.com
